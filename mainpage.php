@@ -1,3 +1,13 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['s_username'])) {
+    // Redirect to login page if not logged in
+    header("Location: loginpage.php");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
