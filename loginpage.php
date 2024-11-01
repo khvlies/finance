@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="css/login.css">
 </head>
 <body>
+  <div class="title">FINANCIAL STATEMENT</div>
   <div class="container">
     <div class="logo">
       <img src="images/finance.png" alt="Company Logo" style="width: 140px; height: auto;">
@@ -23,8 +24,9 @@
     <p>
     <a href="#">Forgot password?</a>
     </p>
+  </div>
   <footer>
-    2024 Copyright Reserved
+    &copy;2024 Copyright Reserved
   </footer>
 </body>
 </html>
