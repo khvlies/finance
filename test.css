@@ -1,51 +1,109 @@
+
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
-    color: #333;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
     margin: 0;
-}
-
-.container {
-    width: 90%;
-    max-width: 1000px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    text-align: center;
-}
-
-h1 {
-    margin-bottom: 20px;
-    color: #5d0202;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-}
-
-th, td {
-    padding: 10px;
-    text-align: center;
-    border: 1px solid #ddd;
-}
-
-th {
     background-color: #5d0202;
     color: white;
 }
 
-tr:nth-child(even) {
+.container {
+    padding: 20px;
+    margin-top: 60px;
+}
+
+/* Layout for Row and Columns */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin-top: 60px;
+}
+
+.column {
+    flex: 1;
+    max-width: 250px;
+    min-width: 200px;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Box Content Styling */
+.box-content {
+    background-color: #feeac2;
+    padding: 20px;
+    border-radius: 25px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.box-content:hover {
+    background-color: #56534cc4;
+    color: aliceblue;
+}
+
+/* Image Styling within Box */
+.box-content img {
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
+    max-height: 150px;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+/* Table Styling for Data Display */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 25px;
+    margin: 20px 0;
+    font-size: 18px;
+    text-align: center;
+    background-color: #ddd;
+    color: black;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.table th {
+    background-color: white;
+    color: rgb(113, 4, 4);
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+.table tbody td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+.table tbody tr:nth-child(even) {
     background-color: #f2f2f2;
 }
 
-tr:hover {
-    background-color: #ddd;
+.table tbody tr:hover {
+    background-color: #4e070245;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px 5px;
+    font-size: 14px;
+    border: none;
+    border-radius: 25px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btn-primary{
+ color: #5d0202;
+ background-color: #ddd;
 }

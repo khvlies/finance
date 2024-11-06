@@ -3,7 +3,7 @@
 $user = "root"; //mysql username
 $pass = ""; //mysql password
 $host = "localhost"; //server name or ip address
-$dbname = "finstatdb"; //your db name	
+$dbname = "finstatdb2"; //your db name	
 
 //Create connection
 $dbconn = mysqli_connect($host, $user, $pass, $dbname) or die (mysqli_error($dbconn));

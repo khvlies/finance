@@ -1,13 +1,6 @@
 <?php
-session_start();
-
-if (!isset($_SESSION['s_username'])) {
-    // Redirect to login page if not logged in
-    header("Location: loginpage.php");
-    exit();
-}
+ // Start session here if not already started in navigation.php
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,8 +16,8 @@ if (!isset($_SESSION['s_username'])) {
     <div class="row">
       <div class="column">
         <div id="Kutipan" class="box-content">
-          <a href="#"><img src="images/#" alt="Icon"></a>
-          <h2>Kutipan</h2>
+          <img src="images/#" alt="Icon"></a>
+          <a href="kutipan_bulanan.php"><h2>Kutipan</h2>
         </div>
       </div>
       <div class="column">
@@ -35,10 +28,11 @@ if (!isset($_SESSION['s_username'])) {
       </div>
       <div class="column">
         <div id="Amil" class="box-content">
-        <a href="#"><img src="images/#" alt="Icon"></a>
-            <h2>Amil</h2>
+          <a href="#"><img src="images/#" alt="Icon"></a>
+          <h2>Amil</h2>
         </div>
       </div>
+    </div>
   </div>
 </body>
 </html>
