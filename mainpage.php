@@ -18,6 +18,7 @@ if (!isset($_SESSION['s_username'])) {
   <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
+  <?php include('navigation.php'); ?>
   <div class="content">
     <div class="row">
       <div class="column">
