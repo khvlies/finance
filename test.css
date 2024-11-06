@@ -73,7 +73,7 @@ body {
 }
 
 .table th {
-    background-color: white;
+    background-color: rgb(247, 226, 152);
     color: rgb(113, 4, 4);
     padding: 10px;
     border: 1px solid #ddd;
@@ -84,12 +84,13 @@ body {
     border: 1px solid #ddd;
 }
 
-.table tbody tr:nth-child(even) {
+/*.table tbody tr:nth-child(even) {
     background-color: #f2f2f2;
-}
+}*/
 
 .table tbody tr:hover {
-    background-color: #4e070245;
+    background-color: #4b4949af;
+    color: white;
 }
 
 .btn {
@@ -105,5 +106,5 @@ body {
 
 .btn-primary{
  color: #5d0202;
- background-color: #ddd;
+ background-color: rgb(247, 226, 152);
 }

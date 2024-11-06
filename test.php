@@ -4,45 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kutipan Zakat</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
-            color: #333;
-        }
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: auto;
-            padding: 20px;
-        }
-        h2 {
-            text-align: center;
-            color: #333;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            font-size: 14px;
-        }
-        th, td {
-            padding: 8px;
-            border: 1px solid #ddd;
-            text-align: right;
-        }
-        th {
-            background-color: #d0e4f1;
-            color: #333;
-        }
-        td:first-child, th:first-child {
-            text-align: left;
-        }
-        tfoot td {
-            font-weight: bold;
-            background-color: #e6f1f9;
-        }
-    </style>
+    <link rel="stylesheet" href="overview.css">
 </head>
 <body>
     <div class="container">
