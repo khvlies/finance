@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="images/icon.png"/>
     <title>Kutipan</title>
-    <link rel="stylesheet" href="test.css">
+    <link rel="stylesheet" href="css/mainview.css">
 </head>
 <body>
 <?php include('navigation.php'); ?>
     <main>
     <div class="container my-5">
         <h2>Kutipan Zakat Bulanan</h2>
-        <a class="btn btn-primary" href="test.php" role="button">OVERVIEW</a>
+        <a class="btn btn-primary" href="viewbulanan.php" role="button">OVERVIEW</a>
         <br>
         <table class="table">
             <thead>

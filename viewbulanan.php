@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kutipan Zakat</title>
-    <link rel="stylesheet" href="overview.css">
+    <link rel="stylesheet" href="css/overview.css">
 </head>
 <body>
     <div class="container">
-        <h2>Kutipan Zakat</h2>
+        <a class="btn btn-secondary" href="kutipan_bulanan.php" role="button">BACK</a><h2>Kutipan Zakat</h2>
+        <div class="scrollmenu">
         <table>
             <thead>
                 <tr>
@@ -80,6 +81,7 @@
                 ?>
             </tbody>
         </table>
+        </div>
     </div>
 </body>
 </html>
