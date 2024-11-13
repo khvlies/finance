@@ -46,13 +46,21 @@
                 if (!$result){
                     die("Invalid query: ". $connection->error);
                 }
-
+                // Define month mapping
+                $monthNames = [
+                    1 => "JANUARI", 2 => "FEBRUARI", 3 => "MAC", 4 => "APRIL",
+                    5 => "MEI", 6 => "JUN", 7 => "JULAI", 8 => "OGOS",
+                    9 => "SEPTEMBER", 10 => "OKTOBER", 11 => "NOVEMBER", 12 => "DISEMBER"
+                ];
                 //read data of each row
                 while($row = $result->fetch_assoc()){
+                    $monthName = $monthNames[(int)$row['months']];
+                    $formattedAmount = number_format($row['amount']);
+
                     echo "<tr>
                     <td>$row[years]</td>
-                    <td>$row[months]</td>
-                    <td>$row[amount]</td>
+                    <td>$monthName</td>
+                    <td>$formattedAmount</td>
                     
                 </tr>
                 ";

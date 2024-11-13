@@ -60,7 +60,7 @@ body {
 
 /* Table Styling for Data Display */
 .table {
-    width: 100%;
+    width: 80%;
     border-collapse: collapse;
     border-radius: 25px;
     margin: 20px 0;
