@@ -17,7 +17,7 @@
       <div class="column">
         <div id="Kutipan" class="box-content">
           <img src="images/#" alt="Icon"></a>
-          <a href="kutipan_bulanan.php"><h2>Kutipan</h2>
+          <a href="filter.php"><h2>Kutipan</h2>
         </div>
       </div>
       <div class="column">
