@@ -12,13 +12,13 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 10px 25px;
-    background-color: black;
+    background-color: #ffffff;
     color: black;
     position: fixed;
     top: 0;
-    width: 100%;
+    width: auto;
     margin: 0;
-    overflow: hidden;
+    
 }
 
 header .logo img {

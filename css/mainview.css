@@ -108,3 +108,9 @@ body {
  color: #5d0202;
  background-color: rgb(247, 226, 152);
 }
+
+.btn-secondary{
+    color: rgb(247, 226, 152);
+    background-color: #5d0202;
+   }
+
