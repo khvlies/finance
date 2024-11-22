@@ -1,11 +1,3 @@
-/* General Reset and Body Styling */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    background-color: #5d0202;
-    color: white;
-}
-
 /* Header and Navigation Styling */
 header {
     display: flex;
@@ -16,15 +8,14 @@ header {
     color: black;
     position: fixed;
     top: 0;
-    width: auto;
-    margin: 0;
-    
+    width: 100%; /* Changed from 3000px to 100% */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
 }
 
 header .logo img {
     width: 80px;
     height: auto;
-    padding: 10px;
 }
 
 header nav {
@@ -63,7 +54,7 @@ header nav a:hover::after {
     width: 100%;
 }
 
-/* Profile Dropdown Styling */
+/* Dropdown Profile Styling */
 .profile {
     display: flex;
     align-items: center;
@@ -72,7 +63,7 @@ header nav a:hover::after {
 
 .profile img {
     width: 50px;
-    height: auto;
+    height: 50px;
     border-radius: 50%;
     margin-right: 10px;
 }
@@ -96,8 +87,9 @@ header nav a:hover::after {
     right: 0;
     background-color: #f1f1f1;
     min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    border-radius: 5px;
 }
 
 .dropdown-content a {
@@ -105,6 +97,7 @@ header nav a:hover::after {
     padding: 12px 16px;
     text-decoration: none;
     display: block;
+    border-radius: 5px;
 }
 
 .dropdown-content a:hover {
@@ -120,91 +113,16 @@ header nav a:hover::after {
     color: #5d0202;
 }
 
-/* Content Styling */
-.content {
-    padding: 20px;
-    margin-top: 60px;
-}
-
-/* Flexbox Layout for Main Content */
-.row {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    margin-top: 60px;
-}
-
-.column {
-    flex: 1;
-    max-width: 250px;
-    margin: 5px;
-    min-width: 200px;
-    display: flex;
-    flex-direction: column;
-}
-
-.box-content {
-    background-color: #feeac2;
-    padding: 40px;
-    border-radius: 25px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    color: black;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    cursor: pointer;
-}
-
-.box-content:hover {
-    background-color: #56534cc4;
-    color: aliceblue;
-}
-
-.box-content img {
-    width: 100%;
-    height: auto;
-    border-radius: 15px;
-    max-height: 150px;
-    object-fit: cover;
-}
-
-/* Responsive Styling */
-@media screen and (max-width: 1024px) {
-    header {
-        flex-direction: column;
-    }
-    header nav {
-        margin-top: 10px;
-    }
-    .profile img {
-        width: 45px;
-    }
-}
-
+/* Responsive Adjustments */
 @media screen and (max-width: 768px) {
     header {
-        padding: 10px 15px;
+        flex-direction: column;
+        align-items: flex-start;
     }
-    .logo img {
-        width: 70px;
+    nav {
+        margin-top: 10px;
     }
-    .profile img {
-        width: 40px;
-    }
-}
-
-@media screen and (max-width: 600px) {
-    .profile img {
-        width: 35px;
-    }
-    .column {
-        min-width: 100%;
-    }
-    .box-content {
-        padding: 20px;
-    }
-    .box-content img {
-        width: 60%;
+    nav a {
+        margin: 5px 0;
     }
 }
