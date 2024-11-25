@@ -14,21 +14,21 @@ if (!isset($_SESSION['staff'])) {
 ?>
 <link rel="stylesheet" href="css/nav.css">
 <header>
-  <div class="logo"><img src="images/#.jpg" alt="Company Logo"></div>
+<div class="logo"><img src="images/#.jpg" alt="Company Logo"></div>
   <nav>
-    <a class="active" href="mainpage.php">Home</a>
+    <a href="mainpage.php">Home</a>
     <a href="filter.php">Kutipan</a>
     <a href="#.php">Agih</a>
     <a href="#.php">Amil</a>
-    <div class="dropdown">
-    <div class="profile">
-      <img src="images/profile.png" alt="Profile Icon"/>
-      <button class="dropbtn"><?php echo htmlspecialchars($staff_name); ?></button>
-    </div>
-    <div class="dropdown-content">
-      <a href="#.php">Profile</a>
-      <a href="logout.php">Log Out</a>
-    </div>
-  </div>
   </nav>
+  <div class="dropdown">
+        <div class="profile">
+            <img src="images/profile.png" alt="Profile Icon"/>
+            <button class="dropbtn"><?php echo htmlspecialchars($staff_name); ?></button>
+        </div>
+        <div class="dropdown-content">
+            <a href="#.php">Profile</a>
+            <a href="logout.php">Log Out</a>
+        </div>
+    </div>
 </header>

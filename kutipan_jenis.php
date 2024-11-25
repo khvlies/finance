@@ -18,7 +18,8 @@
             <thead>
                 <tr>
                     <th>YEAR</th>
-                    <th>VIEW</th>
+                    <th>TYPE</th>
+                    <th>AMOUNT</th>
 
                 </tr>
             </thead>
@@ -58,9 +59,8 @@
                         $formattedAmount = number_format($row['amount']);
                         echo "<tr>
                             <td>{$row['years']}</td>
-                            <td >
-                                <a class="btn btn-secondary" href='#.php?study_id={$row['study_id']}'>Bulanan</a>
-                            </td>
+                            <td>$zakatType</td>
+                            <td>$formattedAmount</td>
                         </tr>";
                     }
 
