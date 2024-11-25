@@ -9,91 +9,84 @@
 </head>
 <body>
 <?php include('navigation.php'); ?>
-    <main>
+<main>
     <div class="container my-5">
         <h2>Kutipan Jenis Zakat</h2>
-        <a class="btn btn-primary" href="#.php" role="button">OVERVIEW</a>
+        <a class="btn btn-primary" href="#" role="button">OVERVIEW</a>
         <br>
         <table class="table">
             <thead>
                 <tr>
                     <th>YEAR</th>
                     <th>VIEW</th>
-
                 </tr>
             </thead>
             <tbody>
-                    <?php
-                    // Database credentials
-                    $servername = "localhost";
-                    $username = "root";
-                    $password = "";
-                    $database = "finstatdb2";
+                <?php
+                include('dbconn.php'); // Include database connection
 
-                    // Create connection
-                    $connection = new mysqli($servername, $username, $password, $database);
+                $stmt = $dbconn->prepare("SELECT DISTINCT years FROM kutipan_bulanan ORDER BY years ASC");
+                $stmt->execute();
+                $result = $stmt->get_result();
 
-                    // Check connection
-                    if ($connection->connect_error) {
-                        die("Connection failed: " . $connection->connect_error);
-                    }
-
-                    // SQL Query with Prepared Statement
-                    $stmt = $connection->prepare("SELECT DISTINCT years FROM kutipan_bulanan ORDER BY years ASC");
-                    $stmt->execute();
-                    $result = $stmt->get_result();
-
-                    while($row = $result->fetch_assoc()){
+                while ($row = $result->fetch_assoc()) {
+                    $year = $row['years'];
                     echo "<tr>
-                        <td>{$row['years']}</td>
+                        <td>{$year}</td>
                         <td>
-                            <a class='btn btn-secondary' href='#.php'>Kutipan Bulanan</a>
-                            <a class='btn btn-secondary' href='#.php'>Jenis Kutipan</a>
+                            <button class='btn btn-secondary' data-year='{$year}' data-type='bulanan'>Kutipan Bulanan</button>
+                            <button class='btn btn-secondary' data-year='{$year}' data-type='jenis'>Jenis Kutipan</button>
                         </td>
                     </tr>";
-                    }
+                }
 
-                    // Close connection
-                    $stmt->close();
-                    $connection->close();
-                    ?>
-                </tbody>
+                $stmt->close();
+                ?>
+            </tbody>
         </table>
     </div>
-    </main>
-        <div id="jenisKutipanModal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <h2>Jenis Kutipan</h2>
-            <p>Details about Jenis Kutipan...</p>
-            </div>
-        </div>
+</main>
+<div id="jenisKutipanModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Data</h2>
+        <div id="modal-body"></div>
+    </div>
+</div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const modal = document.getElementById("jenisKutipanModal");
+    const modalBody = document.getElementById("modal-body");
+    const closeModal = modal.querySelector(".close");
 
-        <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const modal = document.getElementById("jenisKutipanModal");
-            const btns = document.querySelectorAll(".btn-secondary");
-            const span = modal.querySelector(".close");
+    document.querySelectorAll(".btn-secondary").forEach(button => {
+        button.addEventListener("click", event => {
+            event.preventDefault();
 
-            btns.forEach((btn) => {
-                btn.addEventListener("click", (event) => {
-                    event.preventDefault();
+            const year = button.getAttribute("data-year");
+            const type = button.getAttribute("data-type");
+            const url = type === "bulanan" ? "KB.php" : "KJ.php";
+
+            fetch(`${url}?year=${year}`)
+                .then(response => response.text())
+                .then(data => {
+                    modalBody.innerHTML = data;
                     modal.style.display = "block";
-                });
-            });
-
-            span.onclick = () => {
-                modal.style.display = "none";
-            };
-
-            window.onclick = (event) => {
-                if (event.target === modal) {
-                    modal.style.display = "none";
-                }
-            };
+                })
+                .catch(error => console.error("Error fetching data:", error));
         });
-        </script>
+    });
 
+    closeModal.onclick = () => {
+        modal.style.display = "none";
+    };
+
+    window.onclick = event => {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    };
+});
+</script>
 </body>
 </html>
-

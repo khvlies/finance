@@ -8,4 +8,8 @@ $dbname = "finstatdb2"; //your db name
 //Create connection
 $dbconn = mysqli_connect($host, $user, $pass, $dbname) or die (mysqli_error($dbconn));
 
+// Check connection
+if ($dbconn->connect_error) {
+    die("Connection failed: " . $dbconn->connect_error);
+}
 ?>

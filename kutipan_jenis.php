@@ -25,22 +25,10 @@
             </thead>
             <tbody>
                     <?php
-                    // Database credentials
-                    $servername = "localhost";
-                    $username = "root";
-                    $password = "";
-                    $database = "finstatdb2";
-
-                    // Create connection
-                    $connection = new mysqli($servername, $username, $password, $database);
-
-                    // Check connection
-                    if ($connection->connect_error) {
-                        die("Connection failed: " . $connection->connect_error);
-                    }
+                    include('dbconn.php');
 
                     // SQL Query with Prepared Statement
-                    $stmt = $connection->prepare("SELECT years, category_id, amount FROM kutipan_jenis");
+                    $stmt = $dbconn->prepare("SELECT years, category_id, amount FROM kutipan_jenis");
                     $stmt->execute();
                     $result = $stmt->get_result();
 
@@ -66,7 +54,7 @@
 
                     // Close connection
                     $stmt->close();
-                    $connection->close();
+                    $dbconn->close();
                     ?>
                 </tbody>
         </table>

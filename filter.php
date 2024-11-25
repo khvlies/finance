@@ -10,7 +10,7 @@
 <body>
 <?php include('navigation.php'); ?>
     <main>
-    <div class="container my-5">
+    <div class="container">
         <h2>Kutipan Zakat Bulanan</h2>
         <a class="btn btn-primary" href="viewbulanan.php" role="button">OVERVIEW</a>
         <br>
@@ -62,17 +62,11 @@
             </thead>
             <tbody>
                 <?php
-                $servername = "localhost";
-                $username = "root";
-                $password = "";
-                $database = "finstatdb2";
-
-                // Create connection
-                $connection = new mysqli($servername, $username, $password, $database);
+                include('dbconn.php');
 
                 // Check connection
-                if ($connection->connect_error){
-                    die("Connection failed: ". $connection->connect_error);
+                if ($dbconn->connect_error){
+                    die("Connection failed: ". $dbconn->connect_error);
                 }
 
                 // Read all rows from database table with filtering
@@ -80,13 +74,13 @@
 
                 // Add conditions based on selected filters
                 if (!empty($_GET['year'])) {
-                    $conditions[] = "years = '" . $connection->real_escape_string($_GET['year']) . "'";
+                    $conditions[] = "years = '" . $dbconn->real_escape_string($_GET['year']) . "'";
                 }
                 if (!empty($_GET['month'])) {
-                    $conditions[] = "months = '" . $connection->real_escape_string($_GET['month']) . "'";
+                    $conditions[] = "months = '" . $dbconn->real_escape_string($_GET['month']) . "'";
                 }
                 if (!empty($_GET['amount'])) {
-                    $conditions[] = "amount >= '" . $connection->real_escape_string($_GET['amount']) . "'";
+                    $conditions[] = "amount >= '" . $dbconn->real_escape_string($_GET['amount']) . "'";
                 }
 
                 // Construct the SQL query with conditions
@@ -94,10 +88,10 @@
                 if (count($conditions) > 0) {
                     $sql .= " WHERE " . implode(" AND ", $conditions);
                 }
-                $result = $connection->query($sql);
+                $result = $dbconn->query($sql);
 
                 if (!$result){
-                    die("Invalid query: ". $connection->error);
+                    die("Invalid query: ". $dbconn->error);
                 }
 
                 // Display data in table with formatted month names and comma-separated amounts
