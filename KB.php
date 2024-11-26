@@ -1,3 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="images/icon.png"/>
+    <title>Kutipan</title>
+    <link rel="stylesheet" href="css/mainview.css">
+</head>
 <?php
 include('dbconn.php');
 
@@ -31,3 +40,4 @@ else {
 
 $dbconn->close();
 ?>
+</html>

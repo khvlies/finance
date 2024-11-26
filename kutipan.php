@@ -11,7 +11,7 @@
 <?php include('navigation.php'); ?>
 <main>
     <div class="container my-5">
-        <h2>Kutipan Jenis Zakat</h2>
+        <h2>Kutipan Zakat</h2>
         <a class="btn btn-primary" href="overview.php" role="button">OVERVIEW</a>
         <br>
         <table class="table">
@@ -46,7 +46,7 @@
         </table>
     </div>
 </main>
-<div id="jenisKutipanModal" class="modal">
+<div id="kutipanModal" class="modal">
     <div class="modal-content">
         <span class="close">&times;</span>
         <h2>Data</h2>
@@ -55,7 +55,7 @@
 </div>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-    const modal = document.getElementById("jenisKutipanModal");
+    const modal = document.getElementById("kutipanModal");
     const modalBody = document.getElementById("modal-body");
     const modalTitle = modal.querySelector("h2");
     const closeModal = modal.querySelector(".close");

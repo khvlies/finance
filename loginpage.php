@@ -18,7 +18,7 @@
     <div class="logo">
       <img src="images/finance.png" alt="Company Logo" style="width: 140px; height: auto;">
     </div>
-    <form id="login-form" action="login2.php" method="post">
+    <form id="login-form" action="logintest.php" method="post">
       <input type="text" name="un" placeholder="Username" required>
       <input type="password" name="password" placeholder="Password" required>
       <input type="submit" value="Login">

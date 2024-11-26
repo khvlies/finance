@@ -1,13 +1,15 @@
 <?php
 session_start();
-$staff_name = isset($_SESSION['s_username']) ? $_SESSION['s_username'] : 'Staff';
+$display_name = isset($_SESSION['staff_name']) ? $_SESSION['staff_name'] : 
+                (isset($_SESSION['admin_name']) ? $_SESSION['admin_name'] : 'User');
 
 // Prevent caching
 header("Cache-Control: no-cache, no-store, must-revalidate");
 header("Pragma: no-cache");
 header("Expires: 0");
 
-if (!isset($_SESSION['staff'])) {
+// Redirect to login page if not logged in
+if (!isset($_SESSION['staff']) && !isset($_SESSION['admin'])) {
   header("Location: loginpage.php");
   exit();
 }
@@ -24,7 +26,7 @@ if (!isset($_SESSION['staff'])) {
   <div class="dropdown">
         <div class="profile">
             <img src="images/profile.png" alt="Profile Icon"/>
-            <button class="dropbtn"><?php echo htmlspecialchars($staff_name); ?></button>
+            <button class="dropbtn"><?php echo htmlspecialchars($display_name); ?></button>
         </div>
         <div class="dropdown-content">
             <a href="#.php">Profile</a>

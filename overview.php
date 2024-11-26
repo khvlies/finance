@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="container">
-        <a class="btn btn-secondary" href="filter.php" role="button">BACK</a>
+        <a class="btn btn-secondary" href="kutipan.php" role="button">BACK</a>
         <h2>Kutipan Zakat</h2>
         <div class="scrollmenu">
             <table>
@@ -71,11 +71,7 @@
                     ?>
                 </tbody>
             </table>
-        </div>
-
-                
-        <h2>Kutipan Jenis Zakat</h2>
-        <div class="scrollmenu">
+        
             <table>
                 <thead>
                     <tr>
