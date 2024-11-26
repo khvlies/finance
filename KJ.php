@@ -17,7 +17,13 @@ if ($year) {
     ];
 
 
-    echo "<table class='table'><thead><tr><th>Type</th><th>Amount</th></tr></thead><tbody>";
+    echo "<table class='table'>
+            <thead>
+            <tr><th>TYPE</th>
+                <th>AMOUNT</th>
+            </tr>
+            </thead>
+        <tbody>";
     while ($row = $result->fetch_assoc()) {
         $zakatType = isset($typekutipan[(int)$row['category_id']]) 
             ? $typekutipan[(int)$row['category_id']] 

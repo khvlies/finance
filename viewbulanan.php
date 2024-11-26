@@ -8,26 +8,17 @@
 </head>
 <body>
     <div class="container">
-        <a class="btn btn-secondary" href="kutipan_bulanan.php" role="button">BACK</a><h2>Kutipan Zakat</h2>
+        <a class="btn btn-secondary" href="filter.php" role="button">BACK</a><h2>Kutipan Zakat</h2>
         <div class="scrollmenu">
         <table>
             <thead>
                 <tr>
                     <th rowspan="2">PRESTASI BULANAN</th>
                     <?php
-                    $servername = "localhost";
-                    $username = "root";
-                    $password = "";
-                    $database = "finstatdb2";
-
-                    // Connect to database
-                    $connection = new mysqli($servername, $username, $password, $database);
-                    if ($connection->connect_error) {
-                        die("Connection failed: " . $connection->connect_error);
-                    }
+                    include('dbconn.php');
 
                     // Get the range of years dynamically from the database
-                    $yearRangeResult = $connection->query("SELECT MIN(years) AS min_year, MAX(years) AS max_year FROM kutipan_bulanan");
+                    $yearRangeResult = $dbconn->query("SELECT MIN(years) AS min_year, MAX(years) AS max_year FROM kutipan_bulanan");
                     $yearRange = $yearRangeResult->fetch_assoc();
                     $minYear = $yearRange['min_year'];
                     $maxYear = $yearRange['max_year'];
@@ -55,7 +46,7 @@
                     for ($year = $minYear; $year <= $maxYear; $year++) {
                         // Get the amount for the current month and year
                         $sql = "SELECT amount FROM kutipan_bulanan WHERE months='$monthNumber' AND years=$year";
-                        $result = $connection->query($sql);
+                        $result = $dbconn->query($sql);
                         if ($result->num_rows > 0) {
                             $row = $result->fetch_assoc();
                             $amount = $row['amount'];
@@ -71,13 +62,13 @@
                 echo "<tfoot><tr><td>JUMLAH KUTIPAN ZAKAT</td>";
                 for ($year = $minYear; $year <= $maxYear; $year++) {
                     $sql = "SELECT SUM(amount) AS year_total FROM kutipan_bulanan WHERE years=$year";
-                    $result = $connection->query($sql);
+                    $result = $dbconn->query($sql);
                     $yearTotal = ($result->num_rows > 0) ? $result->fetch_assoc()['year_total'] : 0;
                     echo "<td>" . number_format($yearTotal, 2) . "</td>";
                 }
                 echo "</tr></tfoot>";
 
-                $connection->close();
+                $dbconn->close();
                 ?>
             </tbody>
         </table>

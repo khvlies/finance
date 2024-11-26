@@ -57,6 +57,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     const modal = document.getElementById("jenisKutipanModal");
     const modalBody = document.getElementById("modal-body");
+    const modalTitle = modal.querySelector("h2");
     const closeModal = modal.querySelector(".close");
 
     document.querySelectorAll(".btn-secondary").forEach(button => {
@@ -66,6 +67,9 @@ document.addEventListener("DOMContentLoaded", () => {
             const year = button.getAttribute("data-year");
             const type = button.getAttribute("data-type");
             const url = type === "bulanan" ? "KB.php" : "KJ.php";
+
+            // Set the modal title to display the year
+            modalTitle.textContent = type === "bulanan" ? `${year}` : `${year}`;
 
             fetch(`${url}?year=${year}`)
                 .then(response => response.text())

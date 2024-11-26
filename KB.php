@@ -15,7 +15,7 @@ if ($year) {
         9 => "SEPTEMBER", 10 => "OKTOBER", 11 => "NOVEMBER", 12 => "DISEMBER"
     ];
 
-    echo "<table class='table'><thead><tr><th>Month</th><th>Amount</th></tr></thead><tbody>";
+    echo "<table class='table'><thead><tr><th>MONTH</th><th>AMOUNT</th></tr></thead><tbody>";
     while ($row = $result->fetch_assoc()) {
         $monthName = $monthNames[(int)$row['months']];
         $formattedAmount = number_format($row['amount']);
