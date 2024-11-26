@@ -12,7 +12,7 @@
 <main>
     <div class="container my-5">
         <h2>Kutipan Jenis Zakat</h2>
-        <a class="btn btn-primary" href="#" role="button">OVERVIEW</a>
+        <a class="btn btn-primary" href="overview.php" role="button">OVERVIEW</a>
         <br>
         <table class="table">
             <thead>

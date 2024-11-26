@@ -73,7 +73,7 @@
             </table>
         </div>
 
-
+                
         <h2>Kutipan Jenis Zakat</h2>
         <div class="scrollmenu">
             <table>
@@ -90,12 +90,19 @@
                 </thead>
                 <tbody>
                     <?php
+                    $typekutipan = [
+                        33 => "Pendapatan", 34 => "Perniagaan", 35 => "Harta", 36 => "Simpanan",
+                        37 => "Saham", 38 => "KWSP", 39 => "Tanaman", 40 => "Emas",
+                        41 => "Ternakan", 42 => "Perak", 43 => "Fitrah"
+                    ];
+                    
                     // Get the list of "jenis zakat" from the database
                     $jenisZakatResult = $dbconn->query("SELECT DISTINCT category_id FROM kutipan_jenis");
                     while ($jenisZakat = $jenisZakatResult->fetch_assoc()) {
                         $jenis = $jenisZakat['category_id'];
+                        $typeName = isset($typekutipan[$jenis]) ? $typekutipan[$jenis] : $jenis;
                         echo "<tr>";
-                        echo "<td>$jenis</td>";
+                        echo "<td>$typeName</td>";
                         for ($year = $minYear; $year <= $maxYear; $year++) {
                             $sql = "SELECT COALESCE(amount, 0) AS amount FROM kutipan_jenis WHERE category_id='$jenis' AND years=$year;";
                             $result = $dbconn->query($sql);
@@ -114,7 +121,7 @@
                         $sql = "SELECT SUM(amount) AS total FROM kutipan_jenis WHERE years=$year";
                         $result = $dbconn->query($sql);
                         $total = ($result->num_rows > 0) ? $result->fetch_assoc()['total'] : 0;
-                        echo "<td>" . number_format($total, 2) . "</td>";
+                        echo "<td>" . number_format((float)$total, 2) . "</td>";
                     }
                     echo "</tr></tfoot>";
 
