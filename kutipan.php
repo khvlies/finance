@@ -36,6 +36,7 @@
                         <td>
                             <button class='btn btn-secondary' data-year='{$year}' data-type='bulanan'>Kutipan Bulanan</button>
                             <button class='btn btn-secondary' data-year='{$year}' data-type='jenis'>Jenis Kutipan</button>
+                            <button class='btn btn-secondary' data-year='{$year}' data-type='jenis'>Kutipan Sumber</button>
                         </td>
                     </tr>";
                 }

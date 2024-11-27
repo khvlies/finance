@@ -7,9 +7,9 @@ if ($year) {
     // Update the query to include only 'jenis kutipan' categories
     $stmt = $dbconn->prepare("
         SELECT k.amount, c.category_name 
-        FROM kutipan_jenis k
+        FROM kutipan_sumber k
         JOIN category c ON k.category_id = c.category_id
-        WHERE k.years = ? AND c.category_type = 'jenis kutipan'
+        WHERE k.years = ? AND c.category_type = 'sumber'
     ");
     $stmt->bind_param("s", $year);
     $stmt->execute();
