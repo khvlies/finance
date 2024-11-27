@@ -36,7 +36,7 @@
                         <td>
                             <button class='btn btn-secondary' data-year='{$year}' data-type='bulanan'>Kutipan Bulanan</button>
                             <button class='btn btn-secondary' data-year='{$year}' data-type='jenis'>Jenis Kutipan</button>
-                            <button class='btn btn-secondary' data-year='{$year}' data-type='jenis'>Kutipan Sumber</button>
+                            <button class='btn btn-secondary' data-year='{$year}' data-type='sumber'>Kutipan Sumber</button>
                         </td>
                     </tr>";
                 }
@@ -62,25 +62,38 @@ document.addEventListener("DOMContentLoaded", () => {
     const closeModal = modal.querySelector(".close");
 
     document.querySelectorAll(".btn-secondary").forEach(button => {
-        button.addEventListener("click", event => {
-            event.preventDefault();
+    button.addEventListener("click", event => {
+        event.preventDefault();
 
-            const year = button.getAttribute("data-year");
-            const type = button.getAttribute("data-type");
-            const url = type === "bulanan" ? "KB.php" : "KJ.php";
+        const year = button.getAttribute("data-year");
+        const type = button.getAttribute("data-type");
 
-            // Set the modal title to display the year
-            modalTitle.textContent = type === "bulanan" ? `${year}` : `${year}`;
+        let url;
+        if (type === "bulanan") {
+            url = "KB.php";
+        } else if (type === "jenis") {
+            url = "KJ.php";
+        } else if (type === "sumber") { // New condition for Kutipan Sumber
+            url = "KS.php";
+        }
 
-            fetch(`${url}?year=${year}`)
-                .then(response => response.text())
-                .then(data => {
-                    modalBody.innerHTML = data;
-                    modal.style.display = "block";
-                })
-                .catch(error => console.error("Error fetching data:", error));
-        });
+        // Update modal title
+        modalTitle.textContent = type === "bulanan" 
+            ? `Kutipan Bulanan (${year})`
+            : type === "jenis" 
+                ? `Jenis Kutipan (${year})`
+                : `Kutipan Sumber (${year})`;
+
+        // Fetch and display the data
+        fetch(`${url}?year=${year}`)
+            .then(response => response.text())
+            .then(data => {
+                modalBody.innerHTML = data;
+                modal.style.display = "block";
+            })
+            .catch(error => console.error("Error fetching data:", error));
     });
+});
 
     closeModal.onclick = () => {
         modal.style.display = "none";
