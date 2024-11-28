@@ -117,7 +117,7 @@ body {
     left: 0;
     top: 0;
     width: 100%;
-    height: auto;
+    height: 100%;
     overflow: hidden;
     background-color: rgba(0, 0, 0, 0.4); /* Black with opacity */
 }
@@ -149,5 +149,17 @@ body {
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+.edit {
+    width: 35px;
+    height: auto;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.edit :hover {
+    transform: scale(1.2); /* Slight zoom effect on hover */
+
 }
 

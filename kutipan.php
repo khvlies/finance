@@ -37,7 +37,9 @@
                             <button class='btn btn-secondary' data-year='{$year}' data-type='bulanan'>Kutipan Bulanan</button>
                             <button class='btn btn-secondary' data-year='{$year}' data-type='jenis'>Jenis Kutipan</button>
                             <button class='btn btn-secondary' data-year='{$year}' data-type='sumber'>Kutipan Sumber</button>
+                            <img src='images/edit.png' class='edit' alt='Edit Icon' data-year='{$year}'>
                         </td>
+                        
                     </tr>";
                 }
 
@@ -54,6 +56,15 @@
         <div id="modal-body"></div>
     </div>
 </div>
+
+<div id="editModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Data</h2>
+        <div id="modal-body"></div>
+    </div>
+</div>
+
 <script>
 document.addEventListener("DOMContentLoaded", () => {
     const modal = document.getElementById("kutipanModal");
