@@ -12,12 +12,6 @@
 <main>
     <div class="container my-5">
         <h2>Kutipan Zakat</h2>
-        <!-- Success Message -->
-        <?php if (isset($_GET['success']) && $_GET['success'] == 1) { ?>
-            <div class="alert alert-success" style="color: green; font-weight: bold; margin-bottom: 15px;">
-                Data successfully updated!
-            </div>
-        <?php } ?>
 
         <a class="btn btn-primary" href="overview.php" role="button">OVERVIEW</a>
         <br>
@@ -57,14 +51,6 @@
     </div>
 </main>
 <div id="kutipanModal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <h2>Data</h2>
-        <div id="modal-body"></div>
-    </div>
-</div>
-
-<div id="editModal" class="modal">
     <div class="modal-content">
         <span class="close">&times;</span>
         <h2>Data</h2>
@@ -124,6 +110,13 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 });
 </script>
+
+<?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
+    <script>
+        alert("Data successfully updated!");
+        window.location.href = "kutipan.php";
+    </script>
+<?php endif; ?>
 
 </body>
 </html>

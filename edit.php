@@ -16,7 +16,7 @@ if (isset($_GET['year'])) {
         9 => "SEPTEMBER", 10 => "OKTOBER", 11 => "NOVEMBER", 12 => "DISEMBER"
     ];
 
-    $stmt_jenis = $dbconn->prepare("SELECT k.amount, c.category_name 
+    $stmt_jenis = $dbconn->prepare("SELECT k.amount, k.category_id, c.category_name 
         FROM kutipan_jenis k
         JOIN category c ON k.category_id = c.category_id
         WHERE k.years = ? AND c.category_type = 'jenis kutipan'");
@@ -24,10 +24,10 @@ if (isset($_GET['year'])) {
     $stmt_jenis->execute();
     $result_jenis = $stmt_jenis->get_result();
 
-    $stmt_sumber = $dbconn->prepare("SELECT COALESCE(k.amount, 0) AS amount, c.category_name 
-    FROM kutipan_sumber k
-    JOIN category c ON k.category_id = c.category_id
-    WHERE k.years = ? AND c.category_type = 'sumber'");
+    $stmt_sumber = $dbconn->prepare("SELECT COALESCE(k.amount, 0) AS amount, k.category_id, c.category_name 
+        FROM kutipan_sumber k
+        JOIN category c ON k.category_id = c.category_id
+        WHERE k.years = ? AND c.category_type = 'sumber'");
     $stmt_sumber->bind_param("i", $year);
     $stmt_sumber->execute();
     $result_sumber = $stmt_sumber->get_result();
@@ -64,7 +64,7 @@ if (isset($_GET['year'])) {
                         <tr>
                             <td><?php echo $monthName; ?></td>
                             <td>
-                                <input type="text" name="bulanan[<?php echo $monthName; ?>]" value="<?php echo $row['amount']; ?>">
+                                <input type="text" name="bulanan[<?php echo $row['months']; ?>]" value="<?php echo $row['amount']; ?>">
                             </td>
                         </tr>
                     <?php } ?>
@@ -85,7 +85,7 @@ if (isset($_GET['year'])) {
                         <tr>
                             <td><?php echo $row['category_name']; ?></td>
                             <td>
-                                <input type="text" name="jenis[<?php echo $row['category_name']; ?>]" value="<?php echo $row['amount']; ?>">
+                                <input type="text" name="jenis[<?php echo $row['category_id']; ?>]" value="<?php echo $row['amount']; ?>">
                             </td>
                         </tr>
                     <?php } ?>
@@ -106,7 +106,7 @@ if (isset($_GET['year'])) {
                         <tr>
                             <td><?php echo $row['category_name']; ?></td>
                             <td>
-                                <input type="text" name="sumber[<?php echo $row['category_name']; ?>]" value="<?php echo $row['amount']; ?>">
+                                <input type="text" name="sumber[<?php echo $row['category_id']; ?>]" value="<?php echo $row['amount']; ?>">
                             </td>
                         </tr>
                     <?php } ?>
