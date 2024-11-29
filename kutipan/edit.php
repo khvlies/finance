@@ -1,5 +1,5 @@
 <?php
-include('dbconn.php');
+include('../dbconn.php');
 
 if (isset($_GET['year'])) {
     $year = $_GET['year'];
@@ -40,13 +40,13 @@ if (isset($_GET['year'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kutipan <?php echo $year; ?></title>
-    <link rel="stylesheet" href="css/edit.css">
+    <link rel="stylesheet" href="../css/edit.css">
 </head>
 <body>
 <main>
-    <a class="btn btn-secondary" href="kutipan.php" role="button">BACK</a>
+    <a class="btn btn-secondary" href="../kutipan/kutipanMain.php" role="button">BACK</a>
     <div class="container">
-        <form action="update.php" method="post">
+        <form action="../kutipan/update.php" method="post">
             <input type="hidden" name="year" value="<?php echo $year; ?>">
 
             <!-- Kutipan Bulanan Section -->

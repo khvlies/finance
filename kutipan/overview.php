@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kutipan Zakat</title>
-    <link rel="stylesheet" href="css/overview.css">
+    <link rel="stylesheet" href="../css/overview.css">
 </head>
 <body>
     <div class="container">
-        <a class="btn btn-secondary" href="kutipan.php" role="button">BACK</a>
+        <a class="btn btn-secondary" href="../kutipan/kutipanMain.php" role="button">BACK</a>
         <h2>Kutipan Zakat</h2>
         <div class="scrollmenu">
             <table>
@@ -16,7 +16,7 @@
                     <tr>
                         <th rowspan="2">PRESTASI BULANAN</th>
                         <?php
-                        include('dbconn.php');
+                        include('../dbconn.php');
 
                         // Get the range of years dynamically from the database
                         $yearRangeResult = $dbconn->query("SELECT MIN(years) AS min_year, MAX(years) AS max_year FROM kutipan_bulanan");

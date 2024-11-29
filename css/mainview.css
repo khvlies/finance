@@ -102,11 +102,11 @@ body {
 
 .btn-primary{
  color: #5d0202;
- background-color: rgb(247, 226, 152);
+ background-color: #f7e298;
 }
 
 .btn-secondary{
-    color: rgb(247, 226, 152);
+    color: #f7e298;
     background-color: #5d0202;
    }
 
@@ -163,3 +163,11 @@ body {
 
 }
 
+a img {
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+a img:hover {
+    transform: scale(1.1); 
+}

@@ -5,15 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="images/icon.png"/>
     <title>Kutipan</title>
-    <link rel="stylesheet" href="css/mainview.css">
+    <link rel="stylesheet" href="../css/mainview.css">
 </head>
 <body>
-<?php include('navigation.php'); ?>
+<?php include('../navigation.php'); ?>
 <main>
     <div class="container my-5">
         <h2>Kutipan Zakat</h2>
-
-        <a class="btn btn-primary" href="overview.php" role="button">OVERVIEW</a>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+            <div>
+                <a class="btn btn-primary" href="../kutipan/overview.php" role="button" title="Overview Data">OVERVIEW</a>
+            </div>
+            <div>
+                <a href="../kutipan/add.php" title="Add Data">
+                    <img src="../images/add.png" alt="Add Icon" style="width: 40px; height: auto;">
+                </a>
+            </div>
+        </div>
         <br>
         <table class="table">
             <thead>
@@ -24,7 +32,7 @@
             </thead>
             <tbody>
                 <?php
-                include('dbconn.php'); // Include database connection
+                include('../dbconn.php'); // Include database connection
 
                 $stmt = $dbconn->prepare("SELECT DISTINCT years FROM kutipan_bulanan ORDER BY years ASC");
                 $stmt->execute();
@@ -38,7 +46,7 @@
                             <button class='btn btn-secondary' data-year='{$year}' data-type='bulanan'>Kutipan Bulanan</button>
                             <button class='btn btn-secondary' data-year='{$year}' data-type='jenis'>Jenis Kutipan</button>
                             <button class='btn btn-secondary' data-year='{$year}' data-type='sumber'>Kutipan Sumber</button>
-                            <a href='edit.php?year={$year}'><img src='images/edit.png' class='edit' alt='Edit Icon'></a>
+                            <a href='../kutipan/edit.php?year={$year}'><img src='../images/edit.png' class='edit' alt='Edit Icon'></a>
                         </td>
                         
                     </tr>";
@@ -74,11 +82,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
         let url;
         if (type === "bulanan") {
-            url = "KB.php";
+            url = "../kutipan/KB.php";
         } else if (type === "jenis") {
-            url = "KJ.php";
+            url = "../kutipan/KJ.php";
         } else if (type === "sumber") { // New condition for Kutipan Sumber
-            url = "KS.php";
+            url = "../kutipan/KS.php";
         }
 
         // Update modal title
@@ -114,7 +122,7 @@ document.addEventListener("DOMContentLoaded", () => {
 <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
     <script>
         alert("Data successfully updated!");
-        window.location.href = "kutipan.php";
+        window.location.href = "../kutipan/kutipanMain.php";
     </script>
 <?php endif; ?>
 

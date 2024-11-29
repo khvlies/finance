@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="images/icon.png"/>
     <title>Kutipan</title>
-    <link rel="stylesheet" href="css/mainview.css">
+    <link rel="stylesheet" href="../css/mainview.css">
 </head>
 <?php
-include('dbconn.php');
+include('../dbconn.php');
 
 $year = $_GET['year'] ?? null;
 

@@ -1,0 +1,65 @@
+body{
+    background-color: #5d0202;
+
+}
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #fefefe;
+    text-align: center;
+}
+
+.form-section {
+    display: none;
+    margin-top: 20px;
+}
+
+.form-section.active {
+    display: block;
+}
+
+label, select, input {
+    display: block;
+    margin: 10px auto;
+    width: 90%;
+    max-width: 400px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px 5px;
+    font-size: 14px;
+    border: none;
+    border-radius: 25px;
+    text-decoration: none;
+    cursor: pointer;
+}
+.btn-primary {
+    display: block;
+    margin: 20px auto;
+    color: #5d0202;
+    background-color: rgb(247, 226, 152);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.btn-primary:hover {
+    background-color: #013809;
+    color: white;
+}
+
+.btn-secondary {
+    color: #5d0202;
+    background-color: rgb(247, 226, 152);
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}

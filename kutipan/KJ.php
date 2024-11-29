@@ -1,5 +1,5 @@
 <?php
-include('dbconn.php');
+include('../dbconn.php');
 
 $year = $_GET['year'] ?? null;
 
