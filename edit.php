@@ -1,134 +1,123 @@
+<?php
+include('dbconn.php');
+
+if (isset($_GET['year'])) {
+    $year = $_GET['year'];
+
+    // Fetch data for the selected year
+    $stmt_bulanan = $dbconn->prepare("SELECT * FROM kutipan_bulanan WHERE years = ?");
+    $stmt_bulanan->bind_param("i", $year);
+    $stmt_bulanan->execute();
+    $result_bulanan = $stmt_bulanan->get_result();
+
+    $monthNames = [
+        1 => "JANUARI", 2 => "FEBRUARI", 3 => "MAC", 4 => "APRIL",
+        5 => "MEI", 6 => "JUN", 7 => "JULAI", 8 => "OGOS",
+        9 => "SEPTEMBER", 10 => "OKTOBER", 11 => "NOVEMBER", 12 => "DISEMBER"
+    ];
+
+    $stmt_jenis = $dbconn->prepare("SELECT k.amount, c.category_name 
+        FROM kutipan_jenis k
+        JOIN category c ON k.category_id = c.category_id
+        WHERE k.years = ? AND c.category_type = 'jenis kutipan'");
+    $stmt_jenis->bind_param("i", $year);
+    $stmt_jenis->execute();
+    $result_jenis = $stmt_jenis->get_result();
+
+    $stmt_sumber = $dbconn->prepare("SELECT COALESCE(k.amount, 0) AS amount, c.category_name 
+    FROM kutipan_sumber k
+    JOIN category c ON k.category_id = c.category_id
+    WHERE k.years = ? AND c.category_type = 'sumber'");
+    $stmt_sumber->bind_param("i", $year);
+    $stmt_sumber->execute();
+    $result_sumber = $stmt_sumber->get_result();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="images/icon.png"/>
-    <title>Kutipan</title>
-    <link rel="stylesheet" href="css/mainview.css">
+    <title>Edit Kutipan Data for <?php echo $year; ?></title>
+    <link rel="stylesheet" href="css/edit.css">
 </head>
 <body>
-<?php include('navigation.php'); ?>
 <main>
-    <div class="container my-5">
-        <h2>Kutipan Zakat</h2>
-        <a class="btn btn-primary" href="overview.php" role="button">OVERVIEW</a>
-        <br>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>YEAR</th>
-                <th>VIEW</th>
-                <th>EDIT</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            include('dbconn.php');
+    <div class="container">
+        <h2 class="section-title">Edit Kutipan Data for Year <?php echo $year; ?></h2>
 
-            $stmt = $dbconn->prepare("SELECT DISTINCT years FROM kutipan_bulanan ORDER BY years ASC");
-            $stmt->execute();
-            $result = $stmt->get_result();
+        <form action="update.php" method="post">
+            <input type="hidden" name="year" value="<?php echo $year; ?>">
 
-            while ($row = $result->fetch_assoc()) {
-                $year = $row['years'];
-                echo "<tr>
-                    <td>{$year}</td>
-                    <td>
-                        <button class='btn btn-secondary' data-year='{$year}' data-type='bulanan'>Kutipan Bulanan</button>
-                        <button class='btn btn-secondary' data-year='{$year}' data-type='jenis'>Jenis Kutipan</button>
-                        <button class='btn btn-secondary' data-year='{$year}' data-type='sumber'>Kutipan Sumber</button>
-                    </td>
-                    <td>
-                        <img src='images/edit.png' class='edit-image' alt='Edit' data-year='{$year}'>
-                    </td>
-                </tr>";
-            }
+            <!-- Kutipan Bulanan Section -->
+            <h3 class="section-title">Kutipan Bulanan</h3>
+            <table class="edit-table">
+                <thead>
+                    <tr>
+                        <th>Month</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php while ($row = $result_bulanan->fetch_assoc()) {
+                        $monthName = $monthNames[(int)$row['months']]; ?>
+                        <tr>
+                            <td><?php echo $monthName; ?></td>
+                            <td>
+                                <input type="text" name="bulanan[<?php echo $monthName; ?>]" value="<?php echo $row['amount']; ?>">
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
 
-            $stmt->close();
-            ?>
-        </tbody>
-    </table>
-    </div>
-</main>
-<div id="kutipanModal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <h2>Data</h2>
-        <div id="modal-body"></div>
-    </div>
-</div>
-<div id="editModal" class="modal">
-    <div class="modal-content">
-        <span class="close-edit">&times;</span>
-        <h2>Edit Data for <span id="edit-year"></span></h2>
-        <form id="edit-form">
-            <div id="edit-modal-body">
-                <!-- Dynamic content from all tables will be loaded here -->
-            </div>
-            <button type="submit" class="btn btn-primary">Save Changes</button>
+            <!-- Jenis Kutipan Section -->
+            <h3 class="section-title">Jenis Kutipan</h3>
+            <table class="edit-table">
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php while ($row = $result_jenis->fetch_assoc()) { ?>
+                        <tr>
+                            <td><?php echo $row['category_name']; ?></td>
+                            <td>
+                                <input type="text" name="jenis[<?php echo $row['category_name']; ?>]" value="<?php echo $row['amount']; ?>">
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+
+            <!-- Kutipan Sumber Section -->
+            <h3 class="section-title">Kutipan Sumber</h3>
+            <table class="edit-table">
+                <thead>
+                    <tr>
+                        <th>Source</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php while ($row = $result_sumber->fetch_assoc()) { ?>
+                        <tr>
+                            <td><?php echo $row['category_name']; ?></td>
+                            <td>
+                                <input type="text" name="sumber[<?php echo $row['category_name']; ?>]" value="<?php echo $row['amount']; ?>">
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn-primary">Save Changes</button>
         </form>
     </div>
-</div>
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-    const editModal = document.getElementById("editModal");
-    const editYearSpan = document.getElementById("edit-year");
-    const editModalBody = document.getElementById("edit-modal-body");
-    const closeEditModal = document.querySelector(".close-edit");
-
-    document.querySelectorAll(".edit-image").forEach(button => {
-        button.addEventListener("click", () => {
-            const year = button.getAttribute("data-year");
-
-            // Update modal title with the selected year
-            editYearSpan.textContent = year;
-
-            // Fetch data from the server for all tables
-            fetch(`edit_all_data.php?year=${year}`)
-                .then(response => response.text())
-                .then(data => {
-                    editModalBody.innerHTML = data; // Load fetched data into modal body
-                    editModal.style.display = "block"; // Show the modal
-                })
-                .catch(error => console.error("Error fetching data:", error));
-        });
-    });
-
-    closeEditModal.onclick = () => {
-        editModal.style.display = "none";
-    };
-
-    window.onclick = event => {
-        if (event.target === editModal) {
-            editModal.style.display = "none";
-        }
-    };
-
-    // Handle form submission
-    document.getElementById("edit-form").addEventListener("submit", event => {
-        event.preventDefault();
-
-        const formData = new FormData(event.target);
-
-        fetch("save_all_data.php", {
-            method: "POST",
-            body: formData,
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert("Data updated successfully!");
-                    editModal.style.display = "none";
-                } else {
-                    alert("Failed to update data!");
-                }
-            })
-            .catch(error => console.error("Error saving data:", error));
-    });
-});
-
-</script>
+</main>
 </body>
 </html>

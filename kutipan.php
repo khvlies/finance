@@ -12,6 +12,13 @@
 <main>
     <div class="container my-5">
         <h2>Kutipan Zakat</h2>
+        <!-- Success Message -->
+        <?php if (isset($_GET['success']) && $_GET['success'] == 1) { ?>
+            <div class="alert alert-success" style="color: green; font-weight: bold; margin-bottom: 15px;">
+                Data successfully updated!
+            </div>
+        <?php } ?>
+
         <a class="btn btn-primary" href="overview.php" role="button">OVERVIEW</a>
         <br>
         <table class="table">
@@ -37,7 +44,7 @@
                             <button class='btn btn-secondary' data-year='{$year}' data-type='bulanan'>Kutipan Bulanan</button>
                             <button class='btn btn-secondary' data-year='{$year}' data-type='jenis'>Jenis Kutipan</button>
                             <button class='btn btn-secondary' data-year='{$year}' data-type='sumber'>Kutipan Sumber</button>
-                            <img src='images/edit.png' class='edit' alt='Edit Icon' data-year='{$year}'>
+                            <a href='edit.php?year={$year}'><img src='images/edit.png' class='edit' alt='Edit Icon'></a>
                         </td>
                         
                     </tr>";
@@ -117,5 +124,6 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 });
 </script>
+
 </body>
 </html>
