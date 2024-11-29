@@ -6,21 +6,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Update Kutipan Bulanan
     foreach ($_POST['bulanan'] as $month => $amount) {
-        $stmt = $dbconn->prepare("UPDATE kutipan_bulanan SET amount = ? WHERE years = ? AND month = ?");
+        $stmt = $dbconn->prepare("UPDATE kutipan_bulanan SET amount = ? WHERE years = ? AND months = ?");
         $stmt->bind_param("dii", $amount, $year, $month);
         $stmt->execute();
     }
 
     // Update Jenis Kutipan
     foreach ($_POST['jenis'] as $jenis_id => $amount) {
-        $stmt = $dbconn->prepare("UPDATE kutipan_jenis SET amount = ? WHERE years = ? AND jenis_id = ?");
+        $stmt = $dbconn->prepare("UPDATE kutipan_jenis SET amount = ? WHERE years = ? AND category_id = ?");
         $stmt->bind_param("dii", $amount, $year, $jenis_id);
         $stmt->execute();
     }
 
     // Update Kutipan Sumber
     foreach ($_POST['sumber'] as $sumber_id => $amount) {
-        $stmt = $dbconn->prepare("UPDATE kutipan_sumber SET amount = ? WHERE years = ? AND sumber_id = ?");
+        $stmt = $dbconn->prepare("UPDATE kutipan_sumber SET amount = ? WHERE years = ? AND category_id = ?");
         $stmt->bind_param("dii", $amount, $year, $sumber_id);
         $stmt->execute();
     }

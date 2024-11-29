@@ -39,19 +39,18 @@ if (isset($_GET['year'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Kutipan Data for <?php echo $year; ?></title>
+    <title>Kutipan <?php echo $year; ?></title>
     <link rel="stylesheet" href="css/edit.css">
 </head>
 <body>
 <main>
+    <a class="btn btn-secondary" href="kutipan.php" role="button">BACK</a>
     <div class="container">
-        <h2 class="section-title">Edit Kutipan Data for Year <?php echo $year; ?></h2>
-
         <form action="update.php" method="post">
             <input type="hidden" name="year" value="<?php echo $year; ?>">
 
             <!-- Kutipan Bulanan Section -->
-            <h3 class="section-title">Kutipan Bulanan</h3>
+            <h2 class="section-title">Kutipan Bulanan</h2>
             <table class="edit-table">
                 <thead>
                     <tr>
@@ -73,7 +72,7 @@ if (isset($_GET['year'])) {
             </table>
 
             <!-- Jenis Kutipan Section -->
-            <h3 class="section-title">Jenis Kutipan</h3>
+            <h2 class="section-title">Jenis Kutipan</h2>
             <table class="edit-table">
                 <thead>
                     <tr>
@@ -94,7 +93,7 @@ if (isset($_GET['year'])) {
             </table>
 
             <!-- Kutipan Sumber Section -->
-            <h3 class="section-title">Kutipan Sumber</h3>
+            <h2 class="section-title">Kutipan Sumber</h2>
             <table class="edit-table">
                 <thead>
                     <tr>

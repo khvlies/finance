@@ -4,6 +4,10 @@ body {
     background-color: #5d0202;
     color: white;
 }
+.container h2{
+    color: white;
+
+}
 
 .container {
     max-width: 80%;
@@ -43,20 +47,39 @@ text-align: center;
     color: #5d0202;
     text-align: center;
 }
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px 5px;
+    font-size: 14px;
+    border: none;
+    border-radius: 25px;
+    text-decoration: none;
+    cursor: pointer;
+}
 
 .btn-primary {
     display: block;
     margin: 20px auto;
-    background-color: #5d0202;
-    color: white;
+    color: #5d0202;
+    background-color: rgb(247, 226, 152);
     padding: 10px 20px;
     border: none;
-    border-radius: 5px;
+    border-radius: 25px;
     cursor: pointer;
     font-size: 16px;
 }
 
 .btn-primary:hover {
-    background-color: rgb(247, 226, 152);
+    background-color: #013809;
+    color: white;
+}
+
+.btn-secondary {
     color: #5d0202;
+    background-color: rgb(247, 226, 152);
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
 }
