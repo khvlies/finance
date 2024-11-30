@@ -12,9 +12,17 @@
 <main>
     <div class="container my-5">
         <h2>Kutipan Zakat</h2>
-
-        <a class="btn btn-primary" href="../kutipan/overview.php" role="button" title="Overview Data">OVERVIEW</a>
-        
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+            <div>
+                <a class="btn btn-primary" href="../kutipan/A-overview.php" role="button" title="Overview Data">OVERVIEW</a>
+            </div>
+            <div>
+                <a href="../kutipan/add.php" title="Add Data">
+                    <img src="../images/add.png" alt="Add Icon" style="width: 40px; height: auto;">
+                </a>
+            </div>
+        </div>
+        <br>
         <table class="table">
             <thead>
                 <tr>
@@ -38,7 +46,7 @@
                             <button class='btn btn-secondary' data-year='{$year}' data-type='bulanan'>Kutipan Bulanan</button>
                             <button class='btn btn-secondary' data-year='{$year}' data-type='jenis'>Jenis Kutipan</button>
                             <button class='btn btn-secondary' data-year='{$year}' data-type='sumber'>Kutipan Sumber</button>
-                            
+                            <a href='../kutipan/edit.php?year={$year}'><img src='../images/edit.png' class='edit' alt='Edit Icon'></a>
                         </td>
                         
                     </tr>";
@@ -110,6 +118,13 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 });
 </script>
+
+<?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
+    <script>
+        alert("Data successfully updated!");
+        window.location.href = "../kutipan/A-kutipan.php";
+    </script>
+<?php endif; ?>
 
 </body>
 </html>

@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="images/#"/>
   <title>Main</title>
-  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="../css/main.css">
 </head>
 <body>
   <?php include('navigation.php'); ?>
@@ -15,7 +15,7 @@
       <div class="column">
         <div id="Kutipan" class="box-content">
           <img src="images/#" alt="Icon"></a>
-          <a href="kutipan.php"><h2>Kutipan</h2>
+          <a href="../kutipan/A-kutipan.php"><h2>Kutipan</h2>
         </div>
       </div>
       <div class="column">

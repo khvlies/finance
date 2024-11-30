@@ -44,7 +44,7 @@ if (isset($_GET['year'])) {
 </head>
 <body>
 <main>
-    <a class="btn btn-secondary" href="../kutipan/kutipanMain.php" role="button">BACK</a>
+    <a class="btn btn-secondary" href="../kutipan/A-kutipan.php" role="button">BACK</a>
     <div class="container">
         <form action="../kutipan/update.php" method="post">
             <input type="hidden" name="year" value="<?php echo $year; ?>">
