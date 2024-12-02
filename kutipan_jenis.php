@@ -52,7 +52,6 @@
                         </tr>";
                     }
 
-                    // Close connection
                     $stmt->close();
                     $dbconn->close();
                     ?>
