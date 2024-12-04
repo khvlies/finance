@@ -27,19 +27,16 @@
                     <?php
                     include('dbconn.php');
 
-                    // SQL Query with Prepared Statement
                     $stmt = $dbconn->prepare("SELECT years, category_id, amount FROM kutipan_jenis");
                     $stmt->execute();
                     $result = $stmt->get_result();
 
-                    // Category mapping
                     $typekutipan = [
                         33 => "Pendapatan", 34 => "Perniagaan", 35 => "Harta", 36 => "Simpanan",
                         37 => "Saham", 38 => "KWSP", 39 => "Tanaman", 40 => "Emas",
                         41 => "Ternakan", 42 => "Perak", 43 => "Fitrah"
                     ];
 
-                    // Display results in table rows
                     while ($row = $result->fetch_assoc()) {
                         $zakatType = isset($typekutipan[(int)$row['category_id']]) 
                             ? $typekutipan[(int)$row['category_id']] 
