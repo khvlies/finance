@@ -16,7 +16,7 @@ if (!isset($_SESSION['staff']) && !isset($_SESSION['admin'])) {
 ?>
 <link rel="stylesheet" href="../css/nav.css">
 <header>
-<div class="logo"><img src="../images/#.jpg" alt="Company Logo"></div>
+<div class="logo"><img src="../images/logo.png" alt="Company Logo"></div>
   <nav>
     <a href="../mainpage.php">Home</a>
     <a href="../filter.php">Kutipan</a>
