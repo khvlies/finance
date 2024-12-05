@@ -23,9 +23,6 @@
       <input type="password" name="password" placeholder="Password" required>
       <input type="submit" value="Login">
     </form>
-    <p>
-    <a href="#">Forgot password?</a>
-    </p>
   </div>
   <footer>
     &copy;2024 Copyright Reserved

@@ -23,7 +23,7 @@ $result_sumber = $stmt_sumber->get_result();
 <body>
     <a class="btn btn-secondary" href="../kutipan/A-kutipan.php" role="button">BACK</a>
     <div class="container">
-        <h2>Add Data</h2>
+        <h2>ADD NEW DATA</h2>
 
         <!-- Dropdown to select the type of data to add -->
         <label for="data-type">Select Data Type:</label>

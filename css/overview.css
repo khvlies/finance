@@ -23,18 +23,14 @@ h2 {
 }
 
 .btn-secondary {
-    background-color: #6c757d;
-    color: white;
+    background-color: #f7e298;
+    color: #5d0202;
     padding: 10px 20px;
     border-radius: 5px;
     text-decoration: none;
     font-size: 16px;
     margin-bottom: 20px;
     display: inline-block;
-}
-
-.btn-secondary:hover {
-    background-color: #5a6268;
 }
 
 .scrollmenu {
@@ -50,14 +46,14 @@ table {
 }
 
 th, td {
-    text-align: center;
+    text-align: left;
     padding: 12px 10px;
     border: 1px solid #ddd;
     word-wrap: break-word;
 }
 
 th {
-    background-color: #007bff;
+    background-color: #94c4f7;
     color: white;
     font-weight: bold;
 }
