@@ -39,76 +39,54 @@ h2 {
 }
 
 /* Table Styles */
+/* General table styling */
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
+    text-align: center; /* Center-aligns content by default */
 }
 
-th, td {
-    text-align: left;
-    padding: 12px 10px;
+thead th, tbody td {
     border: 1px solid #ddd;
-    word-wrap: break-word;
+    padding: 8px;
 }
 
-th {
-    background-color: #94c4f7;
-    color: white;
+/* Header styling */
+thead th {
+    background-color: #f4f4f4;
+    color: #333;
     font-weight: bold;
 }
 
-td {
-    background-color: #f9f9f9;
-}
-
-tfoot tr {
+/* Ensure the first column has the same width across tables */
+tbody td:first-child, thead th:first-child {
+    width: 200px; /* Adjust to your desired width */
+    text-align: left; /* Aligns title to the left */
     font-weight: bold;
-    background-color: #f1f1f1;
 }
 
-/* Table Header and Data Cells */
-th, td {
-    width: 150px;  /* Make all columns the same width */
+/* Year headers centered */
+thead th:not(:first-child) {
+    text-align: center; /* Ensures year headers stay centered */
 }
 
-tfoot td {
-    background-color: #e9ecef;
+/* Table container styling */
+.scrollmenu {
+    overflow-x: auto; /* Allows horizontal scrolling for wide tables */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fafafa;
 }
 
-/* Responsive Table for Small Screens */
-@media screen and (max-width: 768px) {
-    th, td {
-        font-size: 14px;
-        padding: 8px 5px;
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    tbody td, thead th {
+        font-size: 12px;
+        padding: 6px;
     }
-
-    .scrollmenu {
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
+    tbody td:first-child, thead th:first-child {
+        width: 150px; /* Adjust for smaller screens */
     }
-
-    table {
-        font-size: 14px;
-        width: auto;
-    }
-
-    .btn-secondary {
-        font-size: 14px;
-        padding: 8px 15px;
-    }
-}
-
-/* Footer Section */
-footer {
-    background-color: #343a40;
-    color: white;
-    text-align: center;
-    padding: 20px;
-    margin-top: 40px;
-}
-
-footer a {
-    color: white;
-    text-decoration: none;
 }
