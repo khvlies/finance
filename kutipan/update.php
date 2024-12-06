@@ -1,5 +1,5 @@
 <?php
-include('dbconn.php');
+include('../dbconn.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $year = $_POST['year'];
@@ -25,6 +25,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt->execute();
     }
 
-    header("Location: kutipan.php?success=1");
+    header("Location: ../kutipan/kutipanMain.php?success=1");
 }
 ?>

@@ -14,14 +14,14 @@
     <div class="row">
       <div class="column">
         <div id="Kutipan" class="box-content">
-          <img src="images/#" alt="Icon"></a>
-          <a href="kutipan/kutipanMain.php"><h2>Kutipan</h2>
+          <img src="images/#" alt="Icon">
+          <a href="../kutipan/kutipanMain.php"><h2>Kutipan</h2></a>
         </div>
       </div>
       <div class="column">
         <div id="Agihan" class="box-content">
-          <a href="#"><img src="images/#" alt="Icon"></a>
-          <h2>Agihan</h2>
+          <img src="images/#" alt="Icon">
+          <a href="../agihan/agihanMain.php"><h2>Agihan</h2></a>
         </div>
       </div>
       <div class="column">

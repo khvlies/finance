@@ -9,19 +9,19 @@
   <link rel="stylesheet" href="../css/main.css">
 </head>
 <body>
-  <?php include('navigation.php'); ?>
+  <?php include('A-navigation.php'); ?>
   <div class="content">
     <div class="row">
       <div class="column">
         <div id="Kutipan" class="box-content">
-          <img src="images/#" alt="Icon"></a>
-          <a href="../kutipan/A-kutipan.php"><h2>Kutipan</h2>
+          <img src="images/#" alt="Icon">
+          <a href="../kutipan/A-kutipan.php"><h2>Kutipan</h2></a>
         </div>
       </div>
       <div class="column">
         <div id="Agihan" class="box-content">
-          <a href="#"><img src="images/#" alt="Icon"></a>
-          <h2>Agihan</h2>
+          <img src="images/#" alt="Icon">
+          <a href="../agihan/A-agihan.php"><h2>Agihan</h2></a>
         </div>
       </div>
       <div class="column">

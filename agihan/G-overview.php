@@ -3,20 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kutipan Zakat</title>
+    <title>Agihan Zakat</title>
     <link rel="stylesheet" href="../css/overview.css">
 </head>
 <body>
     <div class="container">
-        <a class="btn btn-secondary" href="../kutipan/kutipanMain.php" role="button">BACK</a>
+        <a class="btn btn-secondary" href="../agihan/A-agihan.php" role="button">BACK</a>
         <h2>Kutipan Zakat</h2>
         <div class="scrollmenu">
-
-            <!-- PRESTASI BULANAN Section -->
             <table>
                 <thead>
                     <tr>
-                        <th>PRESTASI BULANAN</th>
+                        <th>KATEGORI AGIHAN</th>
                         <?php
                         include('../dbconn.php');
 
@@ -34,49 +32,11 @@
                 </thead>
                 <tbody>
                     <?php
-                    $monthNames = [
-                        1 => "JANUARI", 2 => "FEBRUARI", 3 => "MAC", 4 => "APRIL",
-                        5 => "MEI", 6 => "JUN", 7 => "JULAI", 8 => "OGOS",
-                        9 => "SEPTEMBER", 10 => "OKTOBER", 11 => "NOVEMBER", 12 => "DISEMBER"
-                    ];
-
-                    foreach ($monthNames as $monthNumber => $monthName) {
-                        echo "<tr>";
-                        echo "<td>$monthName</td>";
-                        for ($year = $minYear; $year <= $maxYear; $year++) {
-                            $stmt = $dbconn->prepare("SELECT COALESCE(amount, 0) AS amount FROM kutipan_bulanan WHERE months = ? AND years = ?");
-                            $stmt->bind_param("ii", $monthNumber, $year);
-                            $stmt->execute();
-                            $result = $stmt->get_result();
-                            $amount = $result->fetch_assoc()['amount'] ?? 0;
-                            echo "<td>" . number_format($amount, 2) . "</td>";
-                            $stmt->close();
-                        }
-                        echo "</tr>";
-                    }
-                    ?>
-                </tbody>
-            </table>
-
-            <!-- KUTIPAN SUMBER Section -->
-            <table>
-                <thead>
-                    <tr>
-                        <th>KUTIPAN SUMBER</th>
-                        <?php
-                        for ($year = $minYear; $year <= $maxYear; $year++) {
-                            echo "<th>$year</th>";
-                        }
-                        ?>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
                     $stmt = $dbconn->prepare("
                         SELECT DISTINCT c.category_name 
-                        FROM kutipan_sumber k
-                        JOIN category c ON k.category_id = c.category_id
-                        WHERE c.category_type = 'sumber'
+                        FROM agihan_category a
+                        JOIN category c ON a.category_id = c.category_id
+                        WHERE c.category_type = 'agihan'
                     ");
                     $stmt->execute();
                     $sumberResult = $stmt->get_result();
@@ -87,10 +47,10 @@
                         echo "<td>$sourceName</td>";
                         for ($year = $minYear; $year <= $maxYear; $year++) {
                             $stmtAmount = $dbconn->prepare("
-                                SELECT COALESCE(SUM(k.amount), 0) AS amount
-                                FROM kutipan_sumber k
-                                JOIN category c ON k.category_id = c.category_id
-                                WHERE k.years = ? AND c.category_name = ?
+                                SELECT COALESCE(SUM(a.amount), 0) AS amount
+                                FROM agihan_category a
+                                JOIN category c ON a.category_id = c.category_id
+                                WHERE a.years = ? AND c.category_name = ?
                             ");
                             $stmtAmount->bind_param("is", $year, $sourceName);
                             $stmtAmount->execute();
@@ -105,11 +65,10 @@
                 </tbody>
             </table>
 
-            <!-- JENIS ZAKAT Section -->
             <table>
                 <thead>
                     <tr>
-                        <th>JENIS ZAKAT</th>
+                        <th>KATEGORI ASNAF</th>
                         <?php
                         for ($year = $minYear; $year <= $maxYear; $year++) {
                             echo "<th>$year</th>";
@@ -121,9 +80,9 @@
                     <?php
                     $stmt = $dbconn->prepare("
                         SELECT DISTINCT c.category_name 
-                        FROM kutipan_jenis k
-                        JOIN category c ON k.category_id = c.category_id
-                        WHERE c.category_type = 'jenis kutipan'
+                        FROM agihan_asnaf a
+                        JOIN category c ON a.category_id = c.category_id
+                        WHERE c.category_type = 'asnaf'
                     ");
                     $stmt->execute();
                     $jenisResult = $stmt->get_result();
@@ -134,10 +93,10 @@
                         echo "<td>$jenisName</td>";
                         for ($year = $minYear; $year <= $maxYear; $year++) {
                             $stmtAmount = $dbconn->prepare("
-                                SELECT COALESCE(SUM(k.amount), 0) AS amount
-                                FROM kutipan_jenis k
-                                JOIN category c ON k.category_id = c.category_id
-                                WHERE k.years = ? AND c.category_name = ?
+                                SELECT COALESCE(SUM(a.amount), 0) AS amount
+                                FROM agihan_asnaf a
+                                JOIN category c ON a.category_id = c.category_id
+                                WHERE a.years = ? AND c.category_name = ?
                             ");
                             $stmtAmount->bind_param("is", $year, $jenisName);
                             $stmtAmount->execute();

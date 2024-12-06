@@ -1,6 +1,6 @@
 <?php
 session_start();
-$display_name = isset($_SESSION['staff_name']) ? $_SESSION['staff_name'] : 'User';
+$display_name = isset($_SESSION['admin_name']) ? $_SESSION['admin_name'] : 'Admin';
 
 // Prevent caching
 header("Cache-Control: no-cache, no-store, must-revalidate");
@@ -8,7 +8,7 @@ header("Pragma: no-cache");
 header("Expires: 0");
 
 // Redirect to login page if not logged in
-if (!isset($_SESSION['staff'])) {
+if (!isset($_SESSION['admin'])) {
   header("Location: loginpage.php");
   exit();
 }
@@ -17,9 +17,9 @@ if (!isset($_SESSION['staff'])) {
 <header>
 <div class="logo"><img src="../images/logo.png" alt="Company Logo"></div>
   <nav>
-    <a href="../mainpage.php">Home</a>
-    <a href="../kutipan/kutipanMain.php">Kutipan</a>
-    <a href="../agihan/agihanMain.php">Agihan</a>
+    <a href="../adminpage.php">Home</a>
+    <a href="../kutipan/A-kutipan.php">Kutipan</a>
+    <a href="../agihan/A-agihan.php">Agihan</a>
     <a href="#.php">Amil</a>
   </nav>
   <div class="dropdown">

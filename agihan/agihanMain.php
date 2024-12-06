@@ -11,20 +11,13 @@
 <?php include('../A-navigation.php'); ?>
 <main>
     <div class="container my-5">
-        <h2>Kutipan Zakat</h2>
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-            <div>
-                <a class="btn btn-primary" href="../kutipan/A-overview.php" role="button" title="Overview Data">OVERVIEW</a>
-            </div>
-            <div>
-                <a href="../kutipan/add.php" title="Add Data">
-                    <img src="../images/add.png" alt="Add Icon" style="width: 40px; height: auto;">
-                </a>
-            </div>
-        </div>
+        <h2>Agihan Zakat</h2>
+        <a class="btn btn-primary" href="../agihan/G-overview.php" role="button" title="Overview Data">OVERVIEW</a>
+            
         <!-- Notification Div -->
         <div id="notification" class="notification"></div>
-        <script>
+
+        <!--<script>
                 // Display notification based on URL parameters
                 const urlParams = new URLSearchParams(window.location.search);
                 const status = urlParams.get('status');
@@ -48,7 +41,7 @@
                         window.history.replaceState({}, document.title, window.location.pathname); // Remove query params
                     }, 5000);
                 }
-            </script>
+            </script> -->
         <br>
         <table class="table">
             <thead>
@@ -61,7 +54,7 @@
                 <?php
                 include('../dbconn.php'); // Include database connection
 
-                $stmt = $dbconn->prepare("SELECT DISTINCT years FROM kutipan_bulanan ORDER BY years ASC");
+                $stmt = $dbconn->prepare("SELECT DISTINCT years FROM agihan_category ORDER BY years ASC");
                 $stmt->execute();
                 $result = $stmt->get_result();
 
@@ -70,10 +63,8 @@
                     echo "<tr>
                         <td>{$year}</td>
                         <td>
-                            <button class='btn btn-secondary' data-year='{$year}' data-type='bulanan'>Kutipan Bulanan</button>
-                            <button class='btn btn-secondary' data-year='{$year}' data-type='jenis'>Jenis Kutipan</button>
-                            <button class='btn btn-secondary' data-year='{$year}' data-type='sumber'>Kutipan Sumber</button>
-                            <a href='../kutipan/edit.php?year={$year}'><img src='../images/edit.png' class='edit' alt='Edit Icon'></a>
+                            <button class='btn btn-secondary' data-year='{$year}' data-type='asnaf'>Agihan Asnaf</button>
+                            <button class='btn btn-secondary' data-year='{$year}' data-type='agihan'>Agihan Zakat</button>
                         </td>
                         
                     </tr>";
@@ -85,43 +76,56 @@
         </table>
     </div>
 </main>
-<div id="kutipanModal" class="modal">
+<div id="agihanModal" class="modal" role="dialog" aria-labelledby="modalTitle">
     <div class="modal-content">
-        <span class="close">&times;</span>
-        <h2>Data</h2>
-        <div id="modal-body"></div>
+        <span class="close" aria-label="Close modal">&times;</span>
+        <h2 id="modalTitle"></h2>
+        <div id="modal-body">Loading...</div>
     </div>
 </div>
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-    const modal = document.getElementById("kutipanModal");
+    const modal = document.getElementById("agihanModal");
     const modalBody = document.getElementById("modal-body");
     const modalTitle = modal.querySelector("h2");
     const closeModal = modal.querySelector(".close");
+    const notification = document.getElementById("notification");
+
+    // Handle status notifications
+    const urlParams = new URLSearchParams(window.location.search);
+    const status = urlParams.get('status');
+    const type = urlParams.get('type');
+
+    if (status) {
+        notification.textContent = status === 'success'
+            ? `Data for ${type.toUpperCase()} added successfully!`
+            : `Failed to add data for ${type.toUpperCase()}. Please try again.`;
+
+        notification.className = `notification ${status}`;
+        notification.style.display = 'block';
+
+        setTimeout(() => {
+            notification.style.display = 'none';
+            window.history.replaceState({}, document.title, window.location.pathname);
+        }, 5000);
+    }
 
     document.querySelectorAll(".btn-secondary").forEach(button => {
-    button.addEventListener("click", event => {
+        button.addEventListener("click", event => {
         event.preventDefault();
 
         const year = button.getAttribute("data-year");
         const type = button.getAttribute("data-type");
 
-        let url;
-        if (type === "bulanan") {
-            url = "../kutipan/KB.php";
-        } else if (type === "jenis") {
-            url = "../kutipan/KJ.php";
-        } else if (type === "sumber") { // New condition for Kutipan Sumber
-            url = "../kutipan/KS.php";
-        }
+        let url = type === "asnaf" ? "../agihan/AA.php" : "../agihan/AZ.php";
 
-        // Update modal title
-        modalTitle.textContent = type === "bulanan" 
-            ? `Kutipan Bulanan (${year})`
-            : type === "jenis" 
-                ? `Jenis Kutipan (${year})`
-                : `Kutipan Sumber (${year})`;
+        modalTitle.textContent = type === "asnaf"
+            ? `Agihan Asnaf (${year})`
+            : `Agihan Zakat (${year})`;
+
+        modalBody.textContent = "Loading...";
+        modal.style.display = "block";
 
         // Fetch and display the data
         fetch(`${url}?year=${year}`)
@@ -144,14 +148,14 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 });
+
 </script>
 
-<?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
+<!--<?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
     <script>
         alert("Data successfully updated!");
-        window.location.href = "../kutipan/A-kutipan.php";
+        window.location.href = "../agihan/A-agihan.php";
     </script>
-<?php endif; ?>
-
+<?php endif; ?> -->
 </body>
 </html>
