@@ -20,7 +20,7 @@ header .logo {
 }
 
 header .logo img {
-    width: 80px;
+    width: 100px;
     height: auto;
 }
 
@@ -72,8 +72,8 @@ header nav a:hover::after {
 }
 
 .profile img {
-    width: 80px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     margin-right: 10px;
     object-fit: cover;
