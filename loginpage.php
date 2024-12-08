@@ -1,8 +1,4 @@
-<?php
-  if (isset($_GET['error']) && $_GET['error'] == 'invalid'): ?>
-    <p style="color: red;">Invalid username or password.</p>
-  <?php endif;
-?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,6 +15,14 @@
       <img src="images/finance.png" alt="Company Logo" style="width: 140px; height: auto;">
     </div>
     <form id="login-form" action="logintest.php" method="post">
+    <?php
+      session_start();
+      if (isset($_SESSION['error'])): ?>
+          <p style="color: red;"><?= htmlspecialchars($_SESSION['error']); ?></p>
+      <?php
+          unset($_SESSION['error']); // Clear the error after displaying
+      endif;
+      ?>
       <input type="text" name="un" placeholder="Username" required>
       <input type="password" name="password" placeholder="Password" required>
       <input type="submit" value="Login">

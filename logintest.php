@@ -24,15 +24,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     verifyUser($dbconn, $name, $password, 'admin', 'a_username', 'a_pass', 'a_fullname', 'admin', 'adminpage.php');
     verifyUser($dbconn, $name, $password, 'staff', 's_username', 's_pass', 's_fullname', 'staff', 'mainpage.php');
-    
-    if (isset($_SESSION['s_username']) || isset($_SESSION['a_username'])) {
-        echo "Login successful";
-    } else {
-        echo "Login failed";
-    }
-    exit();
 
-    $_SESSION['error'] = "Invalid username or password.";
+    $_SESSION['error'] = "Invalid username or password";
     header("Location: loginpage.php");
     exit();
 }
