@@ -12,7 +12,7 @@
 <main>
     <div class="container my-5">
         <h2>Agihan Zakat</h2>
-        <a class="btn btn-primary" href="../agihan/G-overview.php" role="button" title="Overview Data">OVERVIEW</a>
+        <a class="btn btn-primary" href="../agihan/overview.php" role="button" title="Overview Data">OVERVIEW</a>
             
         <!-- Notification Div -->
         <div id="notification" class="notification"></div>
