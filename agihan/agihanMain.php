@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../css/mainview.css">
 </head>
 <body>
-<?php include('../A-navigation.php'); ?>
+<?php include('../navigation.php'); ?>
 <main>
     <div class="container my-5">
         <h2>Agihan Zakat</h2>
