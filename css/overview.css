@@ -76,6 +76,12 @@ tfoot td {
     background-color: #e9ecef;
 }
 
+.container canvas{
+    max-width: 80%; 
+    margin: 0 auto; 
+    display: block;
+}
+
 /* Responsive Table for Small Screens */
 @media screen and (max-width: 768px) {
     th, td {

@@ -5,22 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kutipan Zakat</title>
     <link rel="stylesheet" href="../css/overview.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <div class="container">
-        <a class="btn btn-secondary" href="../kutipan/A-kutipan.php" role="button">BACK</a>
+        <a class="btn btn-secondary" href="../kutipan/kutipanMain.php" role="button">BACK</a>
         <h2>Kutipan Zakat</h2>
         <div class="scrollmenu">
-
-            <!-- PRESTASI BULANAN Section -->
+            <!-- Existing Tables -->
             <table>
                 <thead>
                     <tr>
                         <th>PRESTASI BULANAN</th>
                         <?php
                         include('../dbconn.php');
-
-                        // Get year range
                         $yearRangeResult = $dbconn->query("SELECT MIN(years) AS min_year, MAX(years) AS max_year FROM kutipan_bulanan");
                         $yearRange = $yearRangeResult->fetch_assoc();
                         $minYear = $yearRange['min_year'];
@@ -58,7 +56,7 @@
                 </tbody>
             </table>
 
-            <!-- KUTIPAN SUMBER Section -->
+            <!-- KUTIPAN SUMBER Table -->
             <table>
                 <thead>
                     <tr>
@@ -80,7 +78,6 @@
                     ");
                     $stmt->execute();
                     $sumberResult = $stmt->get_result();
-                    
                     while ($sumber = $sumberResult->fetch_assoc()) {
                         $sourceName = $sumber['category_name'];
                         echo "<tr>";
@@ -105,7 +102,7 @@
                 </tbody>
             </table>
 
-            <!-- JENIS ZAKAT Section -->
+            <!-- JENIS ZAKAT Table -->
             <table>
                 <thead>
                     <tr>
@@ -127,7 +124,6 @@
                     ");
                     $stmt->execute();
                     $jenisResult = $stmt->get_result();
-
                     while ($jenis = $jenisResult->fetch_assoc()) {
                         $jenisName = $jenis['category_name'];
                         echo "<tr>";
@@ -151,7 +147,163 @@
                     ?>
                 </tbody>
             </table>
+
         </div>
     </div>
+
+    <div class="container" >
+    <!-- Add Charts -->
+    <h3>Monthly Performance</h3>
+            <canvas id="monthlyChart"></canvas>
+
+            <h3>Source Contributions</h3>
+            <canvas id="sourceChart"></canvas>
+
+            <h3>Type Contributions</h3>
+            <canvas id="typeChart"></canvas>
+    </div>
+    <?php
+    $dataMonthly = [];
+    $dataSource = [];
+    $dataType = [];
+
+    // Prepare monthly data
+    foreach ($monthNames as $monthNumber => $monthName) {
+        $dataMonthly[$monthName] = [];
+        for ($year = $minYear; $year <= $maxYear; $year++) {
+            $stmt = $dbconn->prepare("SELECT COALESCE(amount, 0) AS amount FROM kutipan_bulanan WHERE months = ? AND years = ?");
+            $stmt->bind_param("ii", $monthNumber, $year);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $dataMonthly[$monthName][$year] = $result->fetch_assoc()['amount'] ?? 0;
+            $stmt->close();
+        }
+    }
+
+    // Prepare source data
+    $sumberResult = $dbconn->query("SELECT DISTINCT category_name FROM category WHERE category_type = 'sumber'");
+    while ($sumber = $sumberResult->fetch_assoc()) {
+        $sourceName = $sumber['category_name'];
+        $dataSource[$sourceName] = [];
+        for ($year = $minYear; $year <= $maxYear; $year++) {
+            $stmt = $dbconn->prepare("SELECT COALESCE(SUM(amount), 0) AS amount FROM kutipan_sumber k JOIN category c ON k.category_id = c.category_id WHERE k.years = ? AND c.category_name = ?");
+            $stmt->bind_param("is", $year, $sourceName);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $dataSource[$sourceName][$year] = $result->fetch_assoc()['amount'] ?? 0;
+            $stmt->close();
+        }
+    }
+
+    // Prepare type data
+    $jenisResult = $dbconn->query("SELECT DISTINCT category_name FROM category WHERE category_type = 'jenis kutipan'");
+    while ($jenis = $jenisResult->fetch_assoc()) {
+        $jenisName = $jenis['category_name'];
+        $dataType[$jenisName] = [];
+        for ($year = $minYear; $year <= $maxYear; $year++) {
+            $stmt = $dbconn->prepare("SELECT COALESCE(SUM(amount), 0) AS amount FROM kutipan_jenis k JOIN category c ON k.category_id = c.category_id WHERE k.years = ? AND c.category_name = ?");
+            $stmt->bind_param("is", $year, $jenisName);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $dataType[$jenisName][$year] = $result->fetch_assoc()['amount'] ?? 0;
+            $stmt->close();
+        }
+    }
+    ?>
+
+
+    <!-- Chart.js Script -->
+    <script>
+    // Ensure years start from 2017 for the charts
+    const chartYears = <?= json_encode(range(2016, $maxYear)); ?>;
+
+    // Filter the monthly, source, and type data for years starting from 2017
+    const monthlyDataFiltered = Object.fromEntries(
+        Object.entries(<?= json_encode($dataMonthly); ?>).map(([month, values]) => [
+            month,
+            Object.entries(values)
+                .filter(([year]) => year >= 2016)
+                .map(([_, value]) => value),
+        ])
+    );
+
+    const sourceDataFiltered = Object.fromEntries(
+        Object.entries(<?= json_encode($dataSource); ?>).map(([source, values]) => [
+            source,
+            Object.entries(values)
+                .filter(([year]) => year >= 2016)
+                .map(([_, value]) => value),
+        ])
+    );
+
+    const typeDataFiltered = Object.fromEntries(
+        Object.entries(<?= json_encode($dataType); ?>).map(([type, values]) => [
+            type,
+            Object.entries(values)
+                .filter(([year]) => year >= 2016)
+                .map(([_, value]) => value),
+        ])
+    );
+
+    // Calculate percentage performance
+    const calculatePercentageIncrease = (data) => {
+        let percentageData = {};
+        Object.entries(data).forEach(([key, values]) => {
+            percentageData[key] = [];
+            for (let i = 1; i < values.length; i++) {
+                const prevValue = values[i - 1];
+                const currValue = values[i];
+                const percentageIncrease = prevValue > 0 ? ((currValue - prevValue) / prevValue) * 100 : 0;
+                percentageData[key].push(percentageIncrease.toFixed(2)); // Round to 2 decimal places
+            }
+        });
+        return percentageData;
+    };
+
+    const percentageMonthly = calculatePercentageIncrease(monthlyDataFiltered);
+    const percentageSource = calculatePercentageIncrease(sourceDataFiltered);
+    const percentageType = calculatePercentageIncrease(typeDataFiltered);
+
+    // Render percentage charts
+    const createPercentageChart = (ctx, data, label) => {
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: chartYears.slice(1), // Skip the first year for percentage performance
+                datasets: Object.entries(data).map(([key, values], index) => ({
+                    label: key,
+                    data: values,
+                    borderColor: `hsl(${index * 40}, 70%, 50%)`,
+                    fill: false,
+                })),
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: 'top' },
+                    tooltip: {
+                        callbacks: {
+                            label: (context) => `${context.raw}%`, // Show percentage sign
+                        },
+                    },
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: (value) => `${value}%`, // Show percentage sign
+                        },
+                    },
+                },
+            },
+        });
+    };
+
+    // Render charts
+    createPercentageChart(document.getElementById('monthlyChart'), percentageMonthly, "Monthly Performance Percentage");
+    createPercentageChart(document.getElementById('sourceChart'), percentageSource, "Source Contributions Percentage");
+    createPercentageChart(document.getElementById('typeChart'), percentageType, "Type Contributions Percentage");
+</script>
+
 </body>
 </html>
