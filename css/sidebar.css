@@ -1,0 +1,170 @@
+/* Header Styling */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 25px;
+    background-color: #ffffff;
+    color: black;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 70px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    box-sizing: border-box;
+}
+
+header .logo img {
+    width: 100px;
+    height: auto;
+}
+
+header .menu-toggle img {
+    width: 30px;
+    cursor: pointer;
+}
+
+/* Sidebar Styling */
+.sidebar {
+    position: fixed;
+    left: -350px;
+    top: 0;
+    width: 250px;
+    height: 95%;
+    background-color: #f1f1f1;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    transition: left 0.3s ease;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.sidebar.active {
+    left: 0;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 35px;
+    color: black;
+    cursor: pointer;
+    align-self: flex-end;
+    margin-bottom: 10px;
+}
+
+.home-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    text-decoration: none;
+    color: black; /* Retain text color for other links */
+}
+
+.nav-icon {
+    width: 20px; 
+    height: 20px;
+    transition: transform 0.3s ease; /* Smooth scale effect */
+}
+
+.home-link:hover .nav-icon {
+    transform: scale(1.15); /* Slightly enlarge the icon on hover */
+}
+.home-link:hover {
+    background-color: transparent; /* Ensure no background color appears */
+}
+
+.sidebar-profile {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.sidebar-profile img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    object-fit: cover;
+}
+
+.sidebar-profile p {
+    font-size: 16px;
+    font-weight: bold;
+    color: black;
+}
+
+.sidebar nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.sidebar nav img{
+    width: 50px;
+    height: auto;
+}
+
+.sidebar nav a {
+    display: block;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+.sidebar nav a:hover {
+    /*color: #ffffff;*/
+    transform: scale(1.15);
+}
+
+/* Bottom Section */
+.sidebar-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: auto;
+}
+
+.sidebar-bottom a {
+    display: block;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+.sidebar-bottom a:hover {
+    background-color: #4b4949af;
+    color: #ffffff;
+}
+
+/* Responsive Adjustments */
+@media screen and (max-width: 768px) {
+    .sidebar {
+        width: 200px;
+    }
+
+    .sidebar-profile img {
+        width: 70px;
+        height: 70px;
+    }
+
+    .sidebar nav a,
+    .sidebar-bottom a {
+        padding: 8px 10px;
+    }
+
+    .menu-toggle img {
+        width: 25px;
+    }
+
+    .close-btn {
+        font-size: 18px;
+    }
+}
