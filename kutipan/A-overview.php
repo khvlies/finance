@@ -9,10 +9,18 @@
 </head>
 <body>
     <div class="container">
-        <a class="btn btn-secondary" href="../kutipan/kutipanMain.php" role="button">BACK</a>
+        <a class="btn btn-secondary" href="../kutipan/A-kutipan.php" role="button">BACK</a>
         <h2>Kutipan Zakat</h2>
         <div class="scrollmenu">
             <!-- Existing Tables -->
+            <div style="text-align: left; margin-bottom: 20px;">
+                <label for="viewMode">Display Mode:</label>
+                <select id="viewMode" onchange="toggleTableView()">
+                    <option value="absolute">Absolute Amounts</option>
+                    <option value="percentage">Percentage</option>
+                </select>
+            </div>
+
             <table>
                 <thead>
                     <tr>
@@ -47,8 +55,19 @@
                             $stmt->execute();
                             $result = $stmt->get_result();
                             $amount = $result->fetch_assoc()['amount'] ?? 0;
-                            echo "<td>" . number_format($amount, 2) . "</td>";
+
+                            // Calculate total for percentage
+                            $stmtTotal = $dbconn->prepare("SELECT COALESCE(SUM(amount), 1) AS total FROM kutipan_bulanan WHERE years = ?");
+                            $stmtTotal->bind_param("i", $year);
+                            $stmtTotal->execute();
+                            $totalResult = $stmtTotal->get_result();
+                            $total = $totalResult->fetch_assoc()['total'];
+
+                            $percentage = ($amount / $total) * 100;
+
+                            echo "<td data-absolute='" . number_format($amount, 2) . "' data-percentage='" . number_format($percentage, 2) . "%'>" . number_format($amount, 2) . "</td>";
                             $stmt->close();
+                            $stmtTotal->close();
                         }
                         echo "</tr>";
                     }
@@ -70,6 +89,7 @@
                 </thead>
                 <tbody>
                     <?php
+                    // Fetch all sources
                     $stmt = $dbconn->prepare("
                         SELECT DISTINCT c.category_name 
                         FROM kutipan_sumber k
@@ -82,7 +102,20 @@
                         $sourceName = $sumber['category_name'];
                         echo "<tr>";
                         echo "<td>$sourceName</td>";
+
                         for ($year = $minYear; $year <= $maxYear; $year++) {
+                            // Get total for the year
+                            $stmtTotal = $dbconn->prepare("
+                                SELECT COALESCE(SUM(amount), 1) AS total
+                                FROM kutipan_sumber
+                                WHERE years = ?
+                            ");
+                            $stmtTotal->bind_param("i", $year);
+                            $stmtTotal->execute();
+                            $totalResult = $stmtTotal->get_result();
+                            $total = $totalResult->fetch_assoc()['total'];
+
+                            // Get the specific source amount
                             $stmtAmount = $dbconn->prepare("
                                 SELECT COALESCE(SUM(k.amount), 0) AS amount
                                 FROM kutipan_sumber k
@@ -93,14 +126,20 @@
                             $stmtAmount->execute();
                             $amountResult = $stmtAmount->get_result();
                             $amount = $amountResult->fetch_assoc()['amount'] ?? 0;
-                            echo "<td>" . number_format($amount, 2) . "</td>";
+
+                            // Calculate percentage
+                            $percentage = ($amount / $total) * 100;
+
+                            echo "<td data-absolute='" . number_format($amount, 2) . "' data-percentage='" . number_format($percentage, 2) . "%'>" . number_format($amount, 2) . "</td>";
                             $stmtAmount->close();
+                            $stmtTotal->close();
                         }
                         echo "</tr>";
                     }
                     ?>
                 </tbody>
             </table>
+
 
             <!-- JENIS ZAKAT Table -->
             <table>
@@ -116,6 +155,7 @@
                 </thead>
                 <tbody>
                     <?php
+                    // Fetch all types
                     $stmt = $dbconn->prepare("
                         SELECT DISTINCT c.category_name 
                         FROM kutipan_jenis k
@@ -128,7 +168,20 @@
                         $jenisName = $jenis['category_name'];
                         echo "<tr>";
                         echo "<td>$jenisName</td>";
+
                         for ($year = $minYear; $year <= $maxYear; $year++) {
+                            // Get total for the year
+                            $stmtTotal = $dbconn->prepare("
+                                SELECT COALESCE(SUM(amount), 1) AS total
+                                FROM kutipan_jenis
+                                WHERE years = ?
+                            ");
+                            $stmtTotal->bind_param("i", $year);
+                            $stmtTotal->execute();
+                            $totalResult = $stmtTotal->get_result();
+                            $total = $totalResult->fetch_assoc()['total'];
+
+                            // Get the specific type amount
                             $stmtAmount = $dbconn->prepare("
                                 SELECT COALESCE(SUM(k.amount), 0) AS amount
                                 FROM kutipan_jenis k
@@ -139,8 +192,13 @@
                             $stmtAmount->execute();
                             $amountResult = $stmtAmount->get_result();
                             $amount = $amountResult->fetch_assoc()['amount'] ?? 0;
-                            echo "<td>" . number_format($amount, 2) . "</td>";
+
+                            // Calculate percentage
+                            $percentage = ($amount / $total) * 100;
+
+                            echo "<td data-absolute='" . number_format($amount, 2) . "' data-percentage='" . number_format($percentage, 2) . "%'>" . number_format($amount, 2) . "</td>";
                             $stmtAmount->close();
+                            $stmtTotal->close();
                         }
                         echo "</tr>";
                     }
@@ -150,17 +208,32 @@
 
         </div>
     </div>
+    <script>
+        function toggleTableView() {
+        const viewMode = document.getElementById("viewMode").value;
+        const cells = document.querySelectorAll("table td[data-absolute][data-percentage]");
+
+        cells.forEach(cell => {
+            if (viewMode === "percentage") {
+                cell.textContent = cell.getAttribute("data-percentage");
+            } else {
+                cell.textContent = cell.getAttribute("data-absolute");
+            }
+        });
+    }
+    </script>
+
 
     <div class="container" >
     <!-- Add Charts -->
-    <h3>Monthly Performance</h3>
-            <canvas id="monthlyChart"></canvas>
+        <h3>MONTHLY PERFORMANCE</h3>
+        <canvas id="monthlyChart"></canvas>
 
-            <h3>Source Contributions</h3>
-            <canvas id="sourceChart"></canvas>
+        <h3>SOURCE CONTRIBUTIONS</h3>
+        <canvas id="sourceChart"></canvas>
 
-            <h3>Type Contributions</h3>
-            <canvas id="typeChart"></canvas>
+        <h3>TYPE CONTRIBUTIONS</h3>
+        <canvas id="typeChart"></canvas>
     </div>
     <?php
     $dataMonthly = [];

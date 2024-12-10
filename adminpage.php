@@ -14,19 +14,19 @@
     <div class="row">
       <div class="column">
         <div id="Kutipan" class="box-content">
-          <img src="images/#" alt="Icon">
-          <a href="../kutipan/A-kutipan.php"><h2>Kutipan</h2></a>
+          <a href="../kutipan/A-kutipan.php"><img src="images/kutipan.png" alt="Icon"></a>
+          <h2>Kutipan</h2></a>
         </div>
       </div>
       <div class="column">
         <div id="Agihan" class="box-content">
-          <img src="images/#" alt="Icon">
-          <a href="../agihan/A-agihan.php"><h2>Agihan</h2></a>
+          <a href="../agihan/A-agihan.php"><img src="images/agihan.png" alt="Icon"></a>
+          <h2>Agihan</h2>
         </div>
       </div>
       <div class="column">
         <div id="Amil" class="box-content">
-          <a href="#"><img src="images/#" alt="Icon"></a>
+          <a href="../amil/A-amil.php"><img src="images/amil.png" alt="Icon"></a>
           <h2>Amil</h2>
         </div>
       </div>

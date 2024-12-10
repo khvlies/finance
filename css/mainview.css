@@ -2,7 +2,7 @@
 body {
     font-family: Arial, sans-serif;
     margin: 0;
-    background-color: #5d0202;
+    background-color: #010739;
     color: white;
 }
 
@@ -74,7 +74,7 @@ body {
 
 .table th {
     background-color: rgb(247, 226, 152);
-    color: rgb(113, 4, 4);
+    color: #010739;
     padding: 10px;
     border: 1px solid #ddd;
 }
@@ -101,13 +101,13 @@ body {
 }
 
 .btn-primary{
- color: #5d0202;
+ color: #010739;
  background-color: #f7e298;
 }
 
 .btn-secondary{
     color: #f7e298;
-    background-color: #5d0202;
+    background-color: #010739;
    }
 
 .modal {

@@ -43,8 +43,8 @@ if (isset($_GET['year'])) {
     <link rel="stylesheet" href="../css/edit.css">
 </head>
 <body>
-<main>
     <a class="btn btn-secondary" href="../kutipan/A-kutipan.php" role="button">BACK</a>
+<main>
     <div class="container">
         <form action="../kutipan/update.php" method="post">
             <input type="hidden" name="year" value="<?php echo $year; ?>">

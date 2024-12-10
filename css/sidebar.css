@@ -5,7 +5,6 @@ header {
     align-items: center;
     padding: 10px 25px;
     background-color: #ffffff;
-    color: black;
     position: fixed;
     top: 0;
     width: 100%;
@@ -32,7 +31,7 @@ header .menu-toggle img {
     top: 0;
     width: 250px;
     height: 95%;
-    background-color: #f1f1f1;
+    background-color: rgba(193, 191, 191, 0.9);
     padding: 20px;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
     transition: left 0.3s ease;
@@ -50,7 +49,7 @@ header .menu-toggle img {
     background: none;
     border: none;
     font-size: 35px;
-    color: black;
+    color: white;
     cursor: pointer;
     align-self: flex-end;
     margin-bottom: 10px;
@@ -62,25 +61,26 @@ header .menu-toggle img {
     justify-content: center;
     padding: 10px;
     text-decoration: none;
-    color: black; /* Retain text color for other links */
 }
 
 .nav-icon {
-    width: 50px; 
-    height: 20px;
-    transition: transform 0.3s ease; /* Smooth scale effect */
+    width: 30px; 
+    height: 30px;
+    transition: transform 0.3s ease;
 }
 
 .home-link:hover .nav-icon {
-    transform: scale(1.15); /* Slightly enlarge the icon on hover */
-}
-.home-link:hover {
-    background-color: transparent; /* Ensure no background color appears */
+    transform: scale(1.15);
 }
 
 .sidebar-profile {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+    color: black;
+}
+
+.sidebar-profile p:hover{
+    color: #052659;
 }
 
 .sidebar-profile img {
@@ -103,22 +103,19 @@ header .menu-toggle img {
     gap: 10px;
 }
 
-.sidebar nav img{
-    width: 50px;
-    height: auto;
-}
-
 .sidebar nav a {
     display: block;
     padding: 10px 15px;
     text-decoration: none;
+    font-size: 13px;
     color: black;
     font-weight: bold;
     transition: color 0.3s, background-color 0.3s;
 }
 
 .sidebar nav a:hover {
-    /*color: #ffffff;*/
+    background-color: #052759c7;
+    color: #ffffff;
     transform: scale(1.15);
 }
 
@@ -135,13 +132,15 @@ header .menu-toggle img {
     padding: 10px 15px;
     text-decoration: none;
     color: black;
+    font-size: 13px;
     font-weight: bold;
     transition: color 0.3s, background-color 0.3s;
 }
 
 .sidebar-bottom a:hover {
-    background-color: #4b4949af;
+    background-color: #052759c7;
     color: #ffffff;
+    transform: scale(1.15);
 }
 
 /* Responsive Adjustments */

@@ -31,15 +31,12 @@ if (!isset($_SESSION['staff'])) {
     </div>
     
     <nav>
-        <a href="../mainpage.php" class="home-link">
-            <img src="../images/home.png" alt="Home Icon" class="nav-icon" />
-        </a>
+        <a href="../mainpage.php">Home</a>
         <a href="../kutipan/kutipanMain.php">Kutipan</a>
         <a href="../agihan/agihanMain.php">Agihan</a>
         <a href="#.php">Amil</a>
     </nav>
     <div class="sidebar-bottom">
-        <a href="#.php">Profile</a>
         <a href="../logout.php">Log Out</a>
     </div>
 </div>

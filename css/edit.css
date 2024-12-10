@@ -1,7 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    margin: 0;
-    background-color: #5d0202;
+    background-color: #010739;
     color: white;
 }
 .container h2{
@@ -31,7 +30,7 @@ text-align: left;
 
 .edit-table th {
 background-color: rgb(247, 226, 152);
-color: #5d0202;
+color: #010739;
 text-align: center;
 }
 
@@ -44,7 +43,7 @@ text-align: center;
 
 .section-title {
     margin-top: 20px;
-    color: #5d0202;
+    color: #010739;
     text-align: center;
 }
 .btn {
@@ -61,7 +60,7 @@ text-align: center;
 .btn-primary {
     display: block;
     margin: 20px auto;
-    color: #5d0202;
+    color: #010739;
     background-color: rgb(247, 226, 152);
     padding: 10px 20px;
     border: none;
@@ -76,7 +75,7 @@ text-align: center;
 }
 
 .btn-secondary {
-    color: #5d0202;
+    color: #010739;
     background-color: rgb(247, 226, 152);
     padding: 10px 20px;
     border: none;

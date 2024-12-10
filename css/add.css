@@ -1,5 +1,6 @@
 body{
-    background-color: #5d0202;
+    font-family: Arial, sans-serif;
+    background-color: #010739;
 
 }
 .container {
@@ -41,7 +42,7 @@ label, select, input {
 .btn-primary {
     display: block;
     margin: 20px auto;
-    color: #5d0202;
+    color: #010739;
     background-color: rgb(247, 226, 152);
     padding: 10px 20px;
     border: none;
@@ -56,7 +57,7 @@ label, select, input {
 }
 
 .btn-secondary {
-    color: #5d0202;
+    color: #010739;
     background-color: rgb(247, 226, 152);
     padding: 10px 20px;
     border: none;
