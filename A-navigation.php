@@ -13,23 +13,40 @@ if (!isset($_SESSION['admin'])) {
   exit();
 }
 ?>
-<link rel="stylesheet" href="../css/nav.css">
+<link rel="stylesheet" href="../css/sidebar.css">
 <header>
-<div class="logo"><img src="../images/logo.png" alt="Company Logo"></div>
-  <nav>
-    <a href="../adminpage.php">Home</a>
-    <a href="../kutipan/A-kutipan.php">Kutipan</a>
-    <a href="../agihan/A-agihan.php">Agihan</a>
-    <a href="#.php">Amil</a>
-  </nav>
-  <div class="dropdown">
-        <div class="profile">
-            <img src="../images/profile.png" alt="Profile Icon"/>
-            <button class="dropbtn"><?php echo htmlspecialchars($display_name); ?></button>
-        </div>
-        <div class="dropdown-content">
-            <a href="#.php">Profile</a>
-            <a href="../logout.php">Log Out</a>
-        </div>
+    <div class="menu-toggle" onclick="toggleSidebar()">
+        <img src="../images/menu.png" alt="Menu Icon" />
+    </div>
+    <div class="logo">
+        <img src="../images/logo.png" alt="Company Logo">
     </div>
 </header>
+
+<div id="sidebar" class="sidebar">
+    <button class="close-btn" onclick="toggleSidebar()">×</button>
+    <div class="sidebar-profile">
+        <img src="../images/profile.png" alt="Profile Icon" />
+        <p><?php echo htmlspecialchars($display_name); ?></p>
+    </div>
+    
+    <nav>
+        <a href="../mainpage.php" class="home-link">
+            <img src="../images/home.png" alt="Home Icon" class="nav-icon" />
+        </a>
+        <a href="../kutipan/kutipanMain.php">Kutipan</a>
+        <a href="../agihan/agihanMain.php">Agihan</a>
+        <a href="#.php">Amil</a>
+    </nav>
+    <div class="sidebar-bottom">
+        <a href="#.php">Profile</a>
+        <a href="../logout.php">Log Out</a>
+    </div>
+</div>
+
+<script>
+    function toggleSidebar() {
+        const sidebar = document.getElementById('sidebar');
+        sidebar.classList.toggle('active');
+    }
+</script>
