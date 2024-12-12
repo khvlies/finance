@@ -10,6 +10,7 @@
 <body>
     <div class="container">
         <a class="btn btn-secondary" href="../agihan/A-agihan.php" role="button">BACK</a>
+        <a class="btn btn-secondary" onclick="generateReport()" role="button">GENERATE REPORT</a>
         <h2>Agihan Zakat</h2>
         <div class="scrollmenu">
             <div style="text-align: left; margin-bottom: 20px;">
@@ -283,6 +284,10 @@
         createPercentageChart(document.getElementById('asnafChart'), percentageAsnaf, "Asnaf Distributions Percentage");
 
     </script>    
-
+    <script>
+        function generateReport() {
+            window.location.href = '../agihan/generateReport.php';
+        }
+    </script>
 </body>
 </html>
