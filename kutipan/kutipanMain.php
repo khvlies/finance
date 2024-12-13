@@ -10,7 +10,7 @@
 <body>
 <?php include('../navigation.php'); ?>
 <main>
-    <div class="container my-5">
+    <div class="container">
         <h2>Kutipan Zakat</h2>
 
         <a class="btn btn-primary" href="../kutipan/overview.php" role="button" title="Overview Data">OVERVIEW</a>

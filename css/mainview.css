@@ -9,7 +9,32 @@ body {
 .container {
     padding: 20px;
     margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 30px;
 }
+.container a img{
+    display: inline-block;
+    width: 40px;
+    height: auto;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+.container a img:hover{
+    transform: scale(1.2);
+}
+
+.center-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    
+} 
 
 /* Layout for Row and Columns */
 .row {
@@ -101,8 +126,9 @@ body {
 }
 
 .btn-primary{
- color: #010739;
- background-color: #f7e298;
+    color: #010739;
+    background-color: #f7e298;
+    
 }
 
 .btn-secondary{

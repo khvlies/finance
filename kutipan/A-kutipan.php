@@ -10,9 +10,9 @@
 <body>
 <?php include('../A-navigation.php'); ?>
 <main>
-    <div class="container my-5">
+    <div class="container">
         <h2>Kutipan Zakat</h2>
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+        <div class ="center-container">
             <div>
                 <a class="btn btn-primary" href="../kutipan/A-overview.php" role="button" title="Overview Data">OVERVIEW</a>
             </div>
