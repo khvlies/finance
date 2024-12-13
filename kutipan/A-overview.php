@@ -10,6 +10,8 @@
 <body>
     <div class="container">
         <a class="btn btn-secondary" href="../kutipan/A-kutipan.php" role="button">BACK</a>
+        <a href="../test.php" class="btn btn-secondary" role="button">Download Report</a>
+
         <h2>Kutipan Zakat</h2>
         <div class="scrollmenu">
             <!-- Existing Tables -->
