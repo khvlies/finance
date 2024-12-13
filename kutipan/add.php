@@ -39,7 +39,17 @@ $result_sumber = $stmt_sumber->get_result();
             <form action="insert_bulanan.php" method="post">
                 <h3>Kutipan Bulanan</h3>
                 <label for="year">Year:</label>
-                <input type="number" id="year" name="year" required>
+                <select id="year" name="year" required>
+                <?php
+                $startYear = 2009; // Define the start year
+                $endYear = date("Y"); // Use the current year as the end year
+
+                // Generate the dropdown options
+                for ($year = $startYear; $year <= $endYear; $year++) {
+                    echo "<option value=\"$year\">$year</option>";
+                }
+                ?>
+                </select>
 
                 <label for="month">Month:</label>
                 <select id="month" name="month" required>
@@ -69,7 +79,17 @@ $result_sumber = $stmt_sumber->get_result();
             <form action="insert_jenis.php" method="post">
                 <h3>Jenis Kutipan</h3>
                 <label for="year">Year:</label>
-                <input type="number" id="year" name="year" required>
+                <select id="year" name="year" required>
+                <?php
+                $startYear = 2009; // Define the start year
+                $endYear = date("Y"); // Use the current year as the end year
+
+                // Generate the dropdown options
+                for ($year = $startYear; $year <= $endYear; $year++) {
+                    echo "<option value=\"$year\">$year</option>";
+                }
+                ?>
+                </select>
 
                 <label for="category">Category:</label>
                 <select id="category" name="category_id" required>
@@ -93,7 +113,17 @@ $result_sumber = $stmt_sumber->get_result();
             <form action="insert_sumber.php" method="post">
                 <h3>Kutipan Sumber</h3>
                 <label for="year">Year:</label>
-                <input type="number" id="year" name="year" required>
+                <select id="year" name="year" required>
+                <?php
+                $startYear = 2009; // Define the start year
+                $endYear = date("Y"); // Use the current year as the end year
+
+                // Generate the dropdown options
+                for ($year = $startYear; $year <= $endYear; $year++) {
+                    echo "<option value=\"$year\">$year</option>";
+                }
+                ?>
+                </select>
 
                 <label for="category">Category:</label>
                 <select id="category" name="category_id" required>

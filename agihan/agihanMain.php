@@ -4,16 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="images/icon.png"/>
-    <title>Kutipan</title>
+    <title>Agihan</title>
     <link rel="stylesheet" href="../css/mainview.css">
 </head>
 <body>
 <?php include('../navigation.php'); ?>
 <main>
-    <div class="container my-5">
+    <div class="container">
         <h2>Agihan Zakat</h2>
-        <a class="btn btn-primary" href="../agihan/overview.php" role="button" title="Overview Data">OVERVIEW</a>
-            
+        <div class ="top-container">
+            <a class="btn btn-primary" href="../agihan/overview.php" role="button" title="Overview Data">OVERVIEW</a>
+        </div>
+
         <!-- Notification Div -->
         <div id="notification" class="notification"></div>
 

@@ -12,7 +12,7 @@
 <main>
     <div class="container">
         <h2>Kutipan Zakat</h2>
-        <div class ="center-container">
+        <div class ="top-container">
             <div>
                 <a class="btn btn-primary" href="../kutipan/A-overview.php" role="button" title="Overview Data">OVERVIEW</a>
             </div>

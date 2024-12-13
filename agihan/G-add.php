@@ -33,12 +33,22 @@ $result_sumber = $stmt_sumber->get_result();
             <option value="asnaf">Kategori Asnaf</option>
         </select>
 
-        <!-- Form for Jenis Kutipan -->
+        <!-- Form for Kategori Agihan -->
         <div id="agihan-form" class="form-section">
             <form action="insert_agihan.php" method="post">
                 <h3>Kategori Agihan</h3>
                 <label for="year">Year:</label>
-                <input type="number" id="year" name="year" required>
+                <select id="year" name="year" required>
+                <?php
+                $startYear = 2009; // Define the start year
+                $endYear = date("Y"); // Use the current year as the end year
+
+                // Generate the dropdown options
+                for ($year = $startYear; $year <= $endYear; $year++) {
+                    echo "<option value=\"$year\">$year</option>";
+                }
+                ?>
+                </select>
 
                 <label for="category">Category:</label>
                 <select id="category" name="category_id" required>
@@ -57,13 +67,22 @@ $result_sumber = $stmt_sumber->get_result();
             </form>
         </div>
 
-        <!-- Form for Kutipan Sumber -->
+        <!-- Form for Agihan Asnaf -->
         <div id="asnaf-form" class="form-section">
             <form action="insert_asnaf.php" method="post">
                 <h3>Kategori Asnaf</h3>
                 <label for="year">Year:</label>
-                <input type="number" id="year" name="year" required>
+                <select id="year" name="year" required>
+                <?php
+                $startYear = 2009; // Define the start year
+                $endYear = date("Y"); // Use the current year as the end year
 
+                // Generate the dropdown options
+                for ($year = $startYear; $year <= $endYear; $year++) {
+                    echo "<option value=\"$year\">$year</option>";
+                }
+                ?>
+                </select>
                 <label for="category">Category:</label>
                 <select id="category" name="category_id" required>
                     <option value="">-- Select Category --</option>

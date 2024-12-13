@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="images/icon.png"/>
-    <title>Kutipan</title>
+    <title>Agihan</title>
     <link rel="stylesheet" href="../css/mainview.css">
 </head>
 <body>
@@ -12,7 +12,7 @@
 <main>
     <div class="container my-5">
         <h2>Agihan Zakat</h2>
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+        <div class= "top-container">
             <div>
                 <a class="btn btn-primary" href="../agihan/G-overview.php" role="button" title="Overview Data">OVERVIEW</a>
             </div>

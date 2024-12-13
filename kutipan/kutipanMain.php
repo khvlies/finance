@@ -12,9 +12,13 @@
 <main>
     <div class="container">
         <h2>Kutipan Zakat</h2>
+        <div class ="top-container">
+            <a class="btn btn-primary" href="../kutipan/overview.php" role="button" title="Overview Data">OVERVIEW</a>
+        </div>
 
-        <a class="btn btn-primary" href="../kutipan/overview.php" role="button" title="Overview Data">OVERVIEW</a>
-        
+        <div id="notification" class="notification"></div>
+        <br>
+
         <table class="table">
             <thead>
                 <tr>
