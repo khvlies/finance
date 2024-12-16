@@ -67,13 +67,14 @@ tfoot tr {
     background-color: #f1f1f1;
 }
 
+tfoot th{
+    background-color: #3a4f65;
+    color: white;
+}
+
 /* Table Header and Data Cells */
 th, td {
     width: 150px;  /* Make all columns the same width */
-}
-
-tfoot td {
-    background-color: #e9ecef;
 }
 
 .container canvas {

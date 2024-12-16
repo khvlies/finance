@@ -10,6 +10,8 @@
 <body>
     <div class="container">
         <a class="btn btn-secondary" href="../kutipan/kutipanMain.php" role="button">BACK</a>
+        <a href="../k_report.php" class="btn btn-secondary" role="button">DOWNLOAD</a>
+
         <h2>Kutipan Zakat</h2>
         <div class="scrollmenu">
             <!-- Existing Tables -->
@@ -73,6 +75,22 @@
                     }
                     ?>
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <th>TOTAL</th>
+                        <?php
+                        for ($year = $minYear; $year <= $maxYear; $year++) {
+                            $stmtTotalYear = $dbconn->prepare("SELECT COALESCE(SUM(amount), 0) AS total FROM kutipan_bulanan WHERE years = ?");
+                            $stmtTotalYear->bind_param("i", $year);
+                            $stmtTotalYear->execute();
+                            $totalResult = $stmtTotalYear->get_result();
+                            $yearTotal = $totalResult->fetch_assoc()['total'];
+                            echo "<th data-absolute='" . number_format($yearTotal, 2) . "' data-percentage='-'>" . number_format($yearTotal, 2) . "</th>";
+                            $stmtTotalYear->close();
+                        }
+                        ?>
+                    </tr>
+                </tfoot>
             </table>
 
             <!-- KUTIPAN SUMBER Table -->
@@ -138,6 +156,22 @@
                     }
                     ?>
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <th>TOTAL</th>
+                        <?php
+                        for ($year = $minYear; $year <= $maxYear; $year++) {
+                            $stmtTotalSourceYear = $dbconn->prepare("SELECT COALESCE(SUM(amount), 0) AS total FROM kutipan_sumber WHERE years = ?");
+                            $stmtTotalSourceYear->bind_param("i", $year);
+                            $stmtTotalSourceYear->execute();
+                            $totalResult = $stmtTotalSourceYear->get_result();
+                            $yearTotal = $totalResult->fetch_assoc()['total'];
+                            echo "<th data-absolute='" . number_format($yearTotal, 2) . "' data-percentage='-'>" . number_format($yearTotal, 2) . "</th>";
+                            $stmtTotalSourceYear->close();
+                        }
+                        ?>
+                    </tr>
+                </tfoot>
             </table>
 
 
@@ -204,6 +238,22 @@
                     }
                     ?>
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <th>TOTAL</th>
+                        <?php
+                        for ($year = $minYear; $year <= $maxYear; $year++) {
+                            $stmtTotalTypeYear = $dbconn->prepare("SELECT COALESCE(SUM(amount), 0) AS total FROM kutipan_jenis WHERE years = ?");
+                            $stmtTotalTypeYear->bind_param("i", $year);
+                            $stmtTotalTypeYear->execute();
+                            $totalResult = $stmtTotalTypeYear->get_result();
+                            $yearTotal = $totalResult->fetch_assoc()['total'];
+                            echo "<th data-absolute='" . number_format($yearTotal, 2) . "' data-percentage='-'>" . number_format($yearTotal, 2) . "</th>";
+                            $stmtTotalTypeYear->close();
+                        }
+                        ?>
+                    </tr>
+                </tfoot>
             </table>
 
         </div>

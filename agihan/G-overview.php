@@ -10,7 +10,8 @@
 <body>
     <div class="container">
         <a class="btn btn-secondary" href="../agihan/A-agihan.php" role="button">BACK</a>
-        <a class="btn btn-secondary" onclick="generateReport()" role="button">GENERATE REPORT</a>
+        <a href="../g_report.php" class="btn btn-secondary" role="button">DOWNLOAD</a>
+
         <h2>Agihan Zakat</h2>
         <div class="scrollmenu">
             <div style="text-align: left; margin-bottom: 20px;">
@@ -86,6 +87,22 @@
                     }
                     ?>
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <th>TOTAL</th>
+                        <?php
+                        for ($year = $minYear; $year <= $maxYear; $year++) {
+                            $stmtTotalSourceYear = $dbconn->prepare("SELECT COALESCE(SUM(amount), 0) AS total FROM agihan_category WHERE years = ?");
+                            $stmtTotalSourceYear->bind_param("i", $year);
+                            $stmtTotalSourceYear->execute();
+                            $totalResult = $stmtTotalSourceYear->get_result();
+                            $yearTotal = $totalResult->fetch_assoc()['total'];
+                            echo "<th data-absolute='" . number_format($yearTotal, 2) . "' data-percentage='-'>" . number_format($yearTotal, 2) . "</th>";
+                            $stmtTotalSourceYear->close();
+                        }
+                        ?>
+                    </tr>
+                </tfoot>
             </table>
 
             <table>
@@ -146,6 +163,22 @@
                     }
                     ?>
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <th>TOTAL</th>
+                        <?php
+                        for ($year = $minYear; $year <= $maxYear; $year++) {
+                            $stmtTotalSourceYear = $dbconn->prepare("SELECT COALESCE(SUM(amount), 0) AS total FROM agihan_asnaf WHERE years = ?");
+                            $stmtTotalSourceYear->bind_param("i", $year);
+                            $stmtTotalSourceYear->execute();
+                            $totalResult = $stmtTotalSourceYear->get_result();
+                            $yearTotal = $totalResult->fetch_assoc()['total'];
+                            echo "<th data-absolute='" . number_format($yearTotal, 2) . "' data-percentage='-'>" . number_format($yearTotal, 2) . "</th>";
+                            $stmtTotalSourceYear->close();
+                        }
+                        ?>
+                    </tr>
+                </tfoot>
             </table>
         </div>
     </div>
@@ -284,10 +317,6 @@
         createPercentageChart(document.getElementById('asnafChart'), percentageAsnaf, "Asnaf Distributions Percentage");
 
     </script>    
-    <script>
-        function generateReport() {
-            window.location.href = '../agihan/generateReport.php';
-        }
-    </script>
+    
 </body>
 </html>
