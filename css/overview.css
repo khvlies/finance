@@ -46,7 +46,6 @@ table {
 }
 
 th, td {
-    text-align: left;
     padding: 12px 10px;
     border: 1px solid #ddd;
     word-wrap: break-word;
@@ -60,6 +59,7 @@ th {
 
 td {
     background-color: #f9f9f9;
+    text-align: left;
 }
 
 tfoot tr {
@@ -85,7 +85,6 @@ th, td {
     display: block;
 }
 
-
 /* Responsive Table for Small Screens */
 @media screen and (max-width: 768px) {
     th, td {
@@ -109,7 +108,7 @@ th, td {
     }
 }
 
-/* Footer Section */
+/* Footer Section 
 footer {
     background-color: #343a40;
     color: white;
@@ -121,4 +120,4 @@ footer {
 footer a {
     color: white;
     text-decoration: none;
-}
+}*/

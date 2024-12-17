@@ -10,7 +10,7 @@
 <body>
     <div class="container">
         <a class="btn btn-secondary" href="../agihan/agihanMain.php" role="button">BACK</a>
-        <a href="../report_G.php" class="btn btn-secondary" role="button">DOWNLOAD</a>
+        <a href="../reportTest.php" class="btn btn-secondary" role="button">DOWNLOAD</a>
 
         <h2>Agihan Zakat</h2>
         <div class="scrollmenu">

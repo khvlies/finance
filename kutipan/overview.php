@@ -10,7 +10,7 @@
 <body>
     <div class="container">
         <a class="btn btn-secondary" href="../kutipan/kutipanMain.php" role="button">BACK</a>
-        <a href="../report_K.php" class="btn btn-secondary" role="button">DOWNLOAD</a>
+        <a href="../reportTest2.php" class="btn btn-secondary" role="button">DOWNLOAD</a>
 
         <h2>Kutipan Zakat</h2>
         <div class="scrollmenu">
