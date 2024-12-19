@@ -22,7 +22,7 @@
                 </a>
             </div>
         </div>
-        <!-- Notification Div -->
+        
         <div id="notification" class="notification"></div>
 
         <!--<script>
@@ -60,7 +60,7 @@
             </thead>
             <tbody>
                 <?php
-                include('../dbconn.php'); // Include database connection
+                include('../dbconn.php');
 
                 $stmt = $dbconn->prepare("SELECT DISTINCT years FROM agihan_category ORDER BY years ASC");
                 $stmt->execute();
@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const closeModal = modal.querySelector(".close");
     const notification = document.getElementById("notification");
 
-    // Handle status notifications
+    //status notifications
     const urlParams = new URLSearchParams(window.location.search);
     const status = urlParams.get('status');
     const type = urlParams.get('type');

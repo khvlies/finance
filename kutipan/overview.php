@@ -14,7 +14,6 @@
 
         <h2>Kutipan Zakat</h2>
         <div class="scrollmenu">
-            <!-- Existing Tables -->
             <div style="text-align: left; margin-bottom: 20px;">
                 <label for="viewMode">Display Mode:</label>
                 <select id="viewMode" onchange="toggleTableView()">

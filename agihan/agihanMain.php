@@ -16,34 +16,8 @@
             <a class="btn btn-primary" href="../agihan/overview.php" role="button" title="Overview Data">OVERVIEW</a>
         </div>
 
-        <!-- Notification Div -->
         <div id="notification" class="notification"></div>
 
-        <!--<script>
-                // Display notification based on URL parameters
-                const urlParams = new URLSearchParams(window.location.search);
-                const status = urlParams.get('status');
-                const type = urlParams.get('type');
-
-                if (status) {
-                    const notification = document.getElementById('notification');
-                    if (status === 'success') {
-                        notification.textContent = `Data for ${type.toUpperCase()} added successfully!`;
-                        notification.classList.add('success');
-                    } else if (status === 'error') {
-                        notification.textContent = `Failed to add data for ${type.toUpperCase()}. Please try again.`;
-                        notification.classList.add('error');
-                    }
-
-                    notification.style.display = 'block';
-
-                    // Hide notification after 5 seconds
-                    setTimeout(() => {
-                        notification.style.display = 'none';
-                        window.history.replaceState({}, document.title, window.location.pathname); // Remove query params
-                    }, 5000);
-                }
-            </script> -->
         <br>
         <table class="table">
             <thead>
@@ -54,7 +28,7 @@
             </thead>
             <tbody>
                 <?php
-                include('../dbconn.php'); // Include database connection
+                include('../dbconn.php');
 
                 $stmt = $dbconn->prepare("SELECT DISTINCT years FROM agihan_category ORDER BY years ASC");
                 $stmt->execute();
@@ -92,26 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const modalBody = document.getElementById("modal-body");
     const modalTitle = modal.querySelector("h2");
     const closeModal = modal.querySelector(".close");
-    const notification = document.getElementById("notification");
-
-    // Handle status notifications
-    const urlParams = new URLSearchParams(window.location.search);
-    const status = urlParams.get('status');
-    const type = urlParams.get('type');
-
-    if (status) {
-        notification.textContent = status === 'success'
-            ? `Data for ${type.toUpperCase()} added successfully!`
-            : `Failed to add data for ${type.toUpperCase()}. Please try again.`;
-
-        notification.className = `notification ${status}`;
-        notification.style.display = 'block';
-
-        setTimeout(() => {
-            notification.style.display = 'none';
-            window.history.replaceState({}, document.title, window.location.pathname);
-        }, 5000);
-    }
+    
 
     document.querySelectorAll(".btn-secondary").forEach(button => {
         button.addEventListener("click", event => {
@@ -153,11 +108,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
 </script>
 
-<!--<?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
-    <script>
-        alert("Data successfully updated!");
-        window.location.href = "../agihan/A-agihan.php";
-    </script>
-<?php endif; ?> -->
 </body>
 </html>

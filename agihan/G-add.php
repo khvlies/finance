@@ -40,10 +40,9 @@ $result_sumber = $stmt_sumber->get_result();
                 <label for="year">Year:</label>
                 <select id="year" name="year" required>
                 <?php
-                $startYear = 2009; // Define the start year
+                $startYear = 2009;
                 $endYear = date("Y"); // Use the current year as the end year
 
-                // Generate the dropdown options
                 for ($year = $startYear; $year <= $endYear; $year++) {
                     echo "<option value=\"$year\">$year</option>";
                 }
@@ -74,10 +73,9 @@ $result_sumber = $stmt_sumber->get_result();
                 <label for="year">Year:</label>
                 <select id="year" name="year" required>
                 <?php
-                $startYear = 2009; // Define the start year
-                $endYear = date("Y"); // Use the current year as the end year
+                $startYear = 2009;
+                $endYear = date("Y");
 
-                // Generate the dropdown options
                 for ($year = $startYear; $year <= $endYear; $year++) {
                     echo "<option value=\"$year\">$year</option>";
                 }
@@ -102,16 +100,16 @@ $result_sumber = $stmt_sumber->get_result();
     </div>
 
     <script>
-        // JavaScript to handle form visibility
+        
         document.getElementById('data-type').addEventListener('change', function () {
             const selectedValue = this.value;
 
-            // Hide all forms
+           
             document.querySelectorAll('.form-section').forEach(section => {
                 section.classList.remove('active');
             });
 
-            // Show the selected form
+           
             if (selectedValue) {
                 document.getElementById(selectedValue + '-form').classList.add('active');
             }
