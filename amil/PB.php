@@ -5,10 +5,10 @@ $year = $_GET['year'] ?? null;
 
 if ($year) {
     $stmt = $dbconn->prepare("
-        SELECT k.amount, c.category_name 
-        FROM kutipan_jenis k
-        JOIN category c ON k.category_id = c.category_id
-        WHERE k.years = ? AND c.category_type = 'jenis kutipan'
+        SELECT m.amount, c.category_name 
+        FROM amil_expense m
+        JOIN category c ON m.category_id = c.category_id
+        WHERE m.years = ? AND c.category_type = 'perbelanjaan'
     ");
     $stmt->bind_param("s", $year);
     $stmt->execute();
@@ -24,7 +24,8 @@ if ($year) {
             <tbody>";
 
     while ($row = $result->fetch_assoc()) {
-        $formattedAmount = number_format($row['amount']);
+        $amount = $row['amount'] ?? 0;
+        $formattedAmount = number_format($amount);
         echo "<tr>
                 <td>{$row['category_name']}</td>
                 <td>{$formattedAmount}</td>

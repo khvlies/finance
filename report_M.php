@@ -15,12 +15,12 @@ try {
     <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Agihan Zakat Report</title>
+        <title>Kewangan Amil Report</title>
         <link rel="stylesheet" href="../css/report.css">
     </head>
     <body>
-        <h1>Agihan Zakat</h1>
-        <div class="section-title">KATEGORI AGIHAN</div>
+        <h1>Kewangan Amil</h1>
+        <div class="section-title">PENDAPATAN AMIL</div>
         <table>
             <thead>
                 <tr>
@@ -30,15 +30,15 @@ try {
 
                     // Prepare and execute statement for categories
                     $stmt = $dbconn->prepare("SELECT DISTINCT c.category_name 
-                                            FROM agihan_category a
-                                            JOIN category c ON a.category_id = c.category_id
-                                            WHERE c.category_type = 'agihan'");
+                                            FROM amil_income m
+                                            JOIN category c ON m.category_id = c.category_id
+                                            WHERE c.category_type = 'pendapatan'");
                     $stmt->execute();
-                    $agihanResult = $stmt->get_result();
+                    $incomeResult = $stmt->get_result();
 
                     $categories = [];
-                    while ($agihan = $agihanResult->fetch_assoc()) {
-                        $category = $agihan['category_name'];
+                    while ($income = $incomeResult->fetch_assoc()) {
+                        $category = $income['category_name'];
                         $categories[] = $category; // Store category names for later use
                         echo "<th>$category</th>";
                     }
@@ -49,7 +49,7 @@ try {
             <tbody>
                 <?php
                 // Fetch the range of years
-                $yearRangeResult = $dbconn->query("SELECT MIN(years) AS min_year, MAX(years) AS max_year FROM agihan_category");
+                $yearRangeResult = $dbconn->query("SELECT MIN(years) AS min_year, MAX(years) AS max_year FROM amil_income");
                 $yearRange = $yearRangeResult->fetch_assoc();
                 $minYear = $yearRange['min_year'];
                 $maxYear = $yearRange['max_year'];
@@ -63,10 +63,10 @@ try {
 
                     // Loop through each category and calculate the amount for the year
                     foreach ($categories as $category) {
-                        $stmtAmount = $dbconn->prepare("SELECT COALESCE(SUM(a.amount), 0) AS amount
-                                                    FROM agihan_category a
-                                                    JOIN category c ON a.category_id = c.category_id
-                                                    WHERE a.years = ? AND c.category_name = ?");
+                        $stmtAmount = $dbconn->prepare("SELECT COALESCE(SUM(m.amount), 0) AS amount
+                                                    FROM amil_income m
+                                                    JOIN category c ON m.category_id = c.category_id
+                                                    WHERE m.years = ? AND c.category_name = ?");
                         $stmtAmount->bind_param("is", $year, $category);
                         $stmtAmount->execute();
                         $amountResult = $stmtAmount->get_result();
@@ -89,9 +89,9 @@ try {
 
                     // Loop through each category to calculate grand totals
                     foreach ($categories as $category) {
-                        $stmtTotalCategory = $dbconn->prepare("SELECT COALESCE(SUM(a.amount), 0) AS total
-                                                            FROM agihan_category a
-                                                            JOIN category c ON a.category_id = c.category_id
+                        $stmtTotalCategory = $dbconn->prepare("SELECT COALESCE(SUM(m.amount), 0) AS total
+                                                            FROM amil_income m
+                                                            JOIN category c ON m.category_id = c.category_id
                                                             WHERE c.category_name = ?");
                         $stmtTotalCategory->bind_param("s", $category);
                         $stmtTotalCategory->execute();
@@ -110,7 +110,7 @@ try {
         </table>
 
         <br>
-        <div class="section-title">AGIHAN ASNAF</div>
+        <div class="section-title">PERBELANJAAN AMIL</div>
         <table>
             <thead>
                 <tr>
@@ -119,15 +119,15 @@ try {
 
                     // Prepare and execute statement for categories
                     $stmt = $dbconn->prepare("SELECT DISTINCT c.category_name 
-                                            FROM agihan_asnaf a
-                                            JOIN category c ON a.category_id = c.category_id
-                                            WHERE c.category_type = 'asnaf'");
+                                            FROM amil_expense m
+                                            JOIN category c ON m.category_id = c.category_id
+                                            WHERE c.category_type = 'perbelanjaan'");
                     $stmt->execute();
-                    $agihanResult = $stmt->get_result();
+                    $expenseResult = $stmt->get_result();
 
                     $categories = [];
-                    while ($agihan = $agihanResult->fetch_assoc()) {
-                        $category = $agihan['category_name'];
+                    while ($expense = $expenseResult->fetch_assoc()) {
+                        $category = $expense['category_name'];
                         $categories[] = $category; // Store category names for later use
                         echo "<th>$category</th>";
                     }
@@ -138,7 +138,7 @@ try {
             <tbody>
                 <?php
                 // Fetch the range of years
-                $yearRangeResult = $dbconn->query("SELECT MIN(years) AS min_year, MAX(years) AS max_year FROM agihan_asnaf");
+                $yearRangeResult = $dbconn->query("SELECT MIN(years) AS min_year, MAX(years) AS max_year FROM amil_expense");
                 $yearRange = $yearRangeResult->fetch_assoc();
                 $minYear = $yearRange['min_year'];
                 $maxYear = $yearRange['max_year'];
@@ -152,10 +152,10 @@ try {
 
                     // Loop through each category and calculate the amount for the year
                     foreach ($categories as $category) {
-                        $stmtAmount = $dbconn->prepare("SELECT COALESCE(SUM(a.amount), 0) AS amount
-                                                    FROM agihan_asnaf a
-                                                    JOIN category c ON a.category_id = c.category_id
-                                                    WHERE a.years = ? AND c.category_name = ?");
+                        $stmtAmount = $dbconn->prepare("SELECT COALESCE(SUM(m.amount), 0) AS amount
+                                                    FROM amil_expense m
+                                                    JOIN category c ON m.category_id = c.category_id
+                                                    WHERE m.years = ? AND c.category_name = ?");
                         $stmtAmount->bind_param("is", $year, $category);
                         $stmtAmount->execute();
                         $amountResult = $stmtAmount->get_result();
@@ -178,9 +178,9 @@ try {
 
                     // Loop through each category to calculate grand totals
                     foreach ($categories as $category) {
-                        $stmtTotalCategory = $dbconn->prepare("SELECT COALESCE(SUM(a.amount), 0) AS total
-                                                            FROM agihan_asnaf a
-                                                            JOIN category c ON a.category_id = c.category_id
+                        $stmtTotalCategory = $dbconn->prepare("SELECT COALESCE(SUM(m.amount), 0) AS total
+                                                            FROM amil_expense m
+                                                            JOIN category c ON m.category_id = c.category_id
                                                             WHERE c.category_name = ?");
                         $stmtTotalCategory->bind_param("s", $category);
                         $stmtTotalCategory->execute();
@@ -208,7 +208,7 @@ try {
     $mpdf->WriteHTML($html);
 
     // Output the PDF
-    $mpdf->Output('Agihan_Zakat_Report.pdf', 'I');
+    $mpdf->Output('Kewangan_Amil_Report.pdf', 'I');
 } catch (\Mpdf\MpdfException $e) {
     echo "An error occurred: " . $e->getMessage();
 }

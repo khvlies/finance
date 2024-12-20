@@ -4,20 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="images/icon.png"/>
-    <title>Kutipan</title>
+    <title>Amil</title>
     <link rel="stylesheet" href="../css/mainview.css">
 </head>
 <body>
 <?php include('../A-navigation.php'); ?>
 <main>
     <div class="container my-5">
-        <h2>Agihan Zakat</h2>
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+        <h2>Kewangan Amil</h2>
+        <div class="top-container">
             <div>
                 <a class="btn btn-primary" href="../amil/M-overview.php" role="button" title="Overview Data">OVERVIEW</a>
             </div>
             <div>
-                <a href="../agihan/M-add.php" title="Add Data">
+                <a href="../amil/M-add.php" title="Add Data">
                     <img src="../images/add.png" alt="Add Icon" style="width: 40px; height: auto;">
                 </a>
             </div>
@@ -73,7 +73,7 @@
                         <td>
                             <button class='btn btn-secondary' data-year='{$year}' data-type='pendapatan'>Pendapatan</button>
                             <button class='btn btn-secondary' data-year='{$year}' data-type='perbelanjaan'>Perbelanjaan</button>
-                            <a href='../agihan/G-edit.php?year={$year}'><img src='../images/edit.png' class='edit' alt='Edit Icon'></a>
+                            <a href='../amil/M-edit.php?year={$year}'><img src='../images/edit.png' class='edit' alt='Edit Icon'></a>
                         </td>
                         
                     </tr>";

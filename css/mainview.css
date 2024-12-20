@@ -132,17 +132,31 @@ body {
 
 .modal-content {
     background-color: #fefefe;
-    margin: 5% auto;
+    margin: 10% auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 80%;
-    max-width: 500px;
+    width: 60%;
+    max-width: 700px;
+    max-height: 530px;
     border-radius: 8px;
     text-align: center;
+    overflow-y: scroll;
+    overscroll-behavior: contain;
 }
+
 .modal-content h2{
     color:#010739;
+   
+    
 }
+.modal-content::-webkit-scrollbar {
+    background: #f1f1f1; /* Background of the scrollbar track */
+    border-radius: 8px;
+}
+.modal-content::-webkit-scrollbar-thumb {
+    background: #a2a2a2; /* Color of the scrollbar thumb */
+    border-radius: 8px;
+}    
 
 .close {
     color: #aaa;
