@@ -165,19 +165,48 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th>TOTAL</th>
+                        <th>TOTAL EXPENSE</th>
                         <?php
                         for ($year = $minYear; $year <= $maxYear; $year++) {
-                            $stmtTotalExpenseYear = $dbconn->prepare("SELECT COALESCE(SUM(amount), 0) AS total FROM amil_expense WHERE years = ?");
+                            $stmtTotalExpenseYear = $dbconn->prepare("SELECT COALESCE(SUM(CASE WHEN category_id IN (15, 16, 17, 18, 19, 20, 21, 22, 25) THEN amount ELSE 0 END), 0) AS total_expense FROM amil_expense WHERE years = ?");
                             $stmtTotalExpenseYear->bind_param("i", $year);
                             $stmtTotalExpenseYear->execute();
                             $totalResult = $stmtTotalExpenseYear->get_result();
-                            $yearTotal = $totalResult->fetch_assoc()['total'];
+                            $yearTotal = $totalResult->fetch_assoc()['total_expense'];
                             echo "<th data-absolute='" . number_format($yearTotal, 2) . "' data-percentage='-'>" . number_format($yearTotal, 2) . "</th>";
                             $stmtTotalExpenseYear->close();
                         }
                         ?>
                     </tr>
+                    <tr>
+                        <th>EXCESS AMOUNT</th>
+                        <?php
+                        for ($year = $minYear; $year <= $maxYear; $year++) {
+                            // Fetch the total income for the year
+                            $stmtTotalIncome = $dbconn->prepare("SELECT COALESCE(SUM(amount), 0) AS total_income FROM amil_income WHERE years = ?");
+                            $stmtTotalIncome->bind_param("i", $year);
+                            $stmtTotalIncome->execute();
+                            $incomeResult = $stmtTotalIncome->get_result();
+                            $totalIncome = $incomeResult->fetch_assoc()['total_income'] ?? 0;
+
+                            // Fetch the specific expense for category_id 23
+                            $stmtSpecificExpense = $dbconn->prepare("SELECT COALESCE(SUM(amount), 0) AS specific_expense FROM amil_expense WHERE years = ? AND category_id = 23");
+                            $stmtSpecificExpense->bind_param("i", $year);
+                            $stmtSpecificExpense->execute();
+                            $specificExpenseResult = $stmtSpecificExpense->get_result();
+                            $specificExpense = $specificExpenseResult->fetch_assoc()['specific_expense'] ?? 0;
+
+                            // Calculate Excess Amount: Total Income - (Total Expense + Specific Expense)
+                            $excessAmount = $totalIncome - ($yearTotal + $specificExpense);
+
+                            echo "<th data-absolute='" . number_format($excessAmount, 2) . "' data-percentage='-'>" . number_format($excessAmount, 2) . "</th>";
+
+                            $stmtTotalIncome->close();
+                            $stmtSpecificExpense->close();
+                        }
+                        ?>
+                    </tr>
+
                 </tfoot>
             </table>
         </div>
@@ -239,84 +268,102 @@
     }
     ?>
 
-    <script>
-        const chartYears = <?= json_encode(range(2016, $maxYear)); ?>;
+<script>
+    const chartYears = <?= json_encode(range($minYear, $maxYear)); ?>;
 
-        // Filtered data for Agihan
-        const incomeDataFiltered = Object.fromEntries(
-            Object.entries(<?= json_encode($dataIncome); ?>).map(([source, values]) => [
-                source,
-                chartYears.map((year) => values[year] || 0),
-            ])
-        );
+    // Filter data for income and expense
+    const incomeDataFiltered = Object.fromEntries(
+        Object.entries(<?= json_encode($dataIncome); ?>).map(([source, values]) => [
+            source,
+            chartYears.map((year) => values[year] || 0),
+        ])
+    );
 
-        // Filtered data for Asnaf
-        const expenseDataFiltered = Object.fromEntries(
-            Object.entries(<?= json_encode($dataExpense); ?>).map(([source, values]) => [
-                source,
-                chartYears.map((year) => values[year] || 0),
-            ])
-        );
+    const expenseDataFiltered = Object.fromEntries(
+        Object.entries(<?= json_encode($dataExpense); ?>).map(([source, values]) => [
+            source,
+            chartYears.map((year) => values[year] || 0),
+        ])
+    );
 
-        // Calculate percentage increase
-        const calculatePercentageIncrease = (data) => {
-            let percentageData = {};
-            Object.entries(data).forEach(([key, values]) => {
-                percentageData[key] = [];
-                for (let i = 1; i < values.length; i++) {
-                    const prevValue = values[i - 1];
-                    const currValue = values[i];
-                    const percentageIncrease = prevValue > 0 ? ((currValue - prevValue) / prevValue) * 100 : 0;
-                    percentageData[key].push(percentageIncrease.toFixed(2)); // Round to 2 decimal places
-                }
-            });
-            return percentageData;
-        };
+    // Calculate percentage increase
+    const calculatePercentageIncrease = (data) => {
+        let percentageData = {};
+        Object.entries(data).forEach(([key, values]) => {
+            percentageData[key] = [];
+            for (let i = 1; i < values.length; i++) {
+                const prevValue = values[i - 1];
+                const currValue = values[i];
+                const percentageIncrease = prevValue > 0 ? ((currValue - prevValue) / prevValue) * 100 : 0;
+                percentageData[key].push(percentageIncrease.toFixed(2)); // Round to 2 decimal places
+            }
+        });
+        return percentageData;
+    };
 
-        // Percentage data
-        const percentageIncome = calculatePercentageIncrease(incomeDataFiltered);
-        const percentageExpense = calculatePercentageIncrease(expenseDataFiltered);
+    const percentageIncome = calculatePercentageIncrease(incomeDataFiltered);
+    const percentageExpense = calculatePercentageIncrease(expenseDataFiltered);
 
-        // Function to create a chart
-        const createPercentageChart = (ctx, data, label) => {
-            new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: chartYears.slice(1), // Skip the first year for percentage performance
-                    datasets: Object.entries(data).map(([key, values], index) => ({
-                        label: key,
-                        data: values,
-                        borderColor: `hsl(${index * 40}, 70%, 50%)`,
-                        fill: false,
-                    })),
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: { position: 'top' },
-                        tooltip: {
-                            callbacks: {
-                                label: (context) => `${context.raw}%`, // Show percentage sign
-                            },
-                        },
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            ticks: {
-                                callback: (value) => `${value}%`, // Show percentage sign
+    // Create a chart with amount and percentage
+    const createChart = (ctx, data, percentageData, label) => {
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: chartYears,
+                datasets: Object.entries(data).map(([key, values], index) => ({
+                    label: key,
+                    data: values,
+                    borderColor: `hsl(${index * 40}, 70%, 50%)`,
+                    fill: false,
+                })),
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: 'top' },
+                    tooltip: {
+                        callbacks: {
+                            label: (context) => {
+                                const yearIndex = context.dataIndex;
+                                const amount = context.raw;
+                                const percentage =
+                                    percentageData[context.dataset.label] &&
+                                    percentageData[context.dataset.label][yearIndex - 1];
+                                return percentage !== undefined
+                                    ? `${context.dataset.label}: RM${amount.toLocaleString()} (${percentage}%)`
+                                    : `${context.dataset.label}: RM${amount.toLocaleString()}`;
                             },
                         },
                     },
                 },
-            });
-        };
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Amount (RM)',
+                        },
+                    },
+                },
+            },
+        });
+    };
 
-        // Create charts
-        createPercentageChart(document.getElementById('incomeChart'), percentageIncome, "Amil Income Percentage");
-        createPercentageChart(document.getElementById('expenseChart'), percentageExpense, "Amil Expense Percentage");
+    // Create income and expense charts
+    createChart(
+        document.getElementById('incomeChart'),
+        incomeDataFiltered,
+        percentageIncome,
+        "Amil Income"
+    );
 
-    </script>    
+    createChart(
+        document.getElementById('expenseChart'),
+        expenseDataFiltered,
+        percentageExpense,
+        "Amil Expense"
+    );
+</script>    
     
 </body>
 </html>
