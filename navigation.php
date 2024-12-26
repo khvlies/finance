@@ -34,7 +34,7 @@ if (!isset($_SESSION['staff'])) {
         <a href="../mainpage.php">Home</a>
         <a href="../kutipan/kutipanMain.php">Kutipan</a>
         <a href="../agihan/agihanMain.php">Agihan</a>
-        <a href="#.php">Amil</a>
+        <a href="../amil/amilMain.php">Amil</a>
     </nav>
     <div class="sidebar-bottom">
         <a href="../logout.php">Log Out</a>

@@ -26,7 +26,7 @@
       </div>
       <div class="column">
         <div id="Amil" class="box-content">
-        <a href="#"><img src="images/agihan.png" alt="Icon"></a>
+        <a href="../amil/amilMain.php"><img src="images/amil.png" alt="Icon"></a>
         <h2>Amil</h2>
         </div>
       </div>
