@@ -3,38 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Website</title>
+    <link rel="icon" href="../images/f-logo.png"  type="image/png">
+    <title>FiST</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            text-align: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
         }
-        header {
-            background-color: #4CAF50;
-            color: white;
-            padding: 20px;
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg,#021024, #052659, #5483B3, #7DA0CA, #C1E8FF);
+            background-size: 400% 400%;
+            animation: gradientBG 10s ease infinite;
+            z-index: -1;
         }
-        button{
-            font-size: large;
-            color:white;
-            background-color: #5d0202;
-
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
         }
+        .container {
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.832);
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            margin-bottom: 20px;
+            font-size: 2rem;
+            color: #2a2a72;
+        }
+        p {
+            margin-bottom: 30px;
+            font-size: 1rem;
+            color: #555;
+        }
+        .btn-login {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 1rem;
+            color: #fff;
+            background-color: #2a2a72;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        .btn-login:hover {
+            background-color: #1e1e57;
+        }
+        .flip-box {
+            width: 150px;
+            height: 150px;
+            perspective: 1000px;
+            margin: 0 auto 20px;
+        }
+        .flip-box-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        .flip-box:hover .flip-box-inner {
+            transform: rotateY(180deg);
+        }
+        .flip-box-front, .flip-box-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 8px;
+        }
+        .flip-box-front {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .flip-box-back {
+            transform: rotateY(180deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .logo {
+            width: 120px;
+            height: 120px;
+        }
+        
     </style>
 </head>
 <body>
-    <header>
-        <h1>Welcome to My Website</h1>
-    </header>
-    <main>
-        <br>
-        <a href="loginpage.php"><button>START</button></a>
-        <p>More updates coming soon!</p>
-    </main>
-    <footer>
-        <p>© 2024 My Website</p>
-    </footer>
+    <div class="container">
+        <div class="flip-box">
+            <div class="flip-box-inner">
+                <div class="flip-box-front">
+                    <img src="../images/f-logo.png" alt="Logo" class="logo">
+                </div>
+                <div class="flip-box-back">
+                    <img src="../images/f-logo.png" alt="Logo Back" class="logo">
+                </div>
+            </div>
+        </div>
+        <h1>Welcome to FiST</h1>
+        <p>Manage your financial records with ease and security. Log in to access your dashboard.</p>
+        <a href="loginpage.php" class="btn-login">Start Now</a>
+    </div>
 </body>
 </html>

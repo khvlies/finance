@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="images/icon.png"/>
+    <link rel="icon" href="../images/f-logo.png"  type="image/png">
     <title>Kutipan</title>
     <link rel="stylesheet" href="../css/mainview.css">
 </head>

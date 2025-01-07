@@ -29,6 +29,7 @@ if (isset($_GET['year'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../images/f-logo.png"  type="image/png">
     <title>Amil <?php echo $year; ?></title>
     <link rel="stylesheet" href="../css/edit.css">
 </head>

@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../images/f-logo.png"  type="image/png">
     <title>Kutipan Zakat</title>
     <link rel="stylesheet" href="../css/overview.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -10,7 +11,7 @@
 <body>
     <div class="container">
         <a class="btn btn-secondary" href="../kutipan/kutipanMain.php" role="button">BACK</a>
-        <a href="../reportTest2.php" class="btn btn-secondary" role="button">DOWNLOAD</a>
+        <a href="../report_K.php" class="btn btn-secondary" role="button">DOWNLOAD</a>
 
         <h2>Kutipan Zakat</h2>
         <div class="scrollmenu">

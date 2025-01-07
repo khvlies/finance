@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../images/f-logo.png"  type="image/png">
     <title>Agihan Zakat</title>
     <link rel="stylesheet" href="../css/overview.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -10,7 +11,7 @@
 <body>
     <div class="container">
         <a class="btn btn-secondary" href="../agihan/agihanMain.php" role="button">BACK</a>
-        <a href="../reportTest.php" class="btn btn-secondary" role="button">DOWNLOAD</a>
+        <a href="../report_G.php" class="btn btn-secondary" role="button">DOWNLOAD</a>
 
         <h2>Agihan Zakat</h2>
         <div class="scrollmenu">
