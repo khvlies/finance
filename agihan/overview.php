@@ -279,7 +279,7 @@
         const percentageAsnaf = calculatePercentageIncrease(asnafDataFiltered);
 
         // Function to create a chart
-        const createPercentageChart = (ctx, data, label) => {
+        const createPercentageChart = (ctx, data, percentageData, label) => {
             new Chart(ctx, {
                 type: 'line',
                 data: {
@@ -297,7 +297,16 @@
                         legend: { position: 'top' },
                         tooltip: {
                             callbacks: {
-                                label: (context) => `${context.raw}%`, // Show percentage sign
+                                label: (context) => {
+                                const yearIndex = context.dataIndex;
+                                const amount = context.raw;
+                                const percentage =
+                                    percentageData[context.dataset.label] &&
+                                    percentageData[context.dataset.label][yearIndex - 1];
+                                return percentage !== undefined
+                                    ? `${context.dataset.label}: RM${amount.toLocaleString()} (${percentage}%)`
+                                    : `${context.dataset.label}: RM${amount.toLocaleString()}`;
+                                },
                             },
                         },
                     },
@@ -305,7 +314,8 @@
                         y: {
                             beginAtZero: true,
                             ticks: {
-                                callback: (value) => `${value}%`, // Show percentage sign
+                                display: true,
+                                text: 'Amount (RM)',
                             },
                         },
                     },
@@ -314,14 +324,20 @@
         };
 
         // Create charts
-        createPercentageChart(document.getElementById('agihanChart'), percentageAgihan, "Zakat Distributions Percentage");
-        createPercentageChart(document.getElementById('asnafChart'), percentageAsnaf, "Asnaf Distributions Percentage");
+        createPercentageChart(
+            document.getElementById('agihanChart'),
+            agihanDataFiltered, 
+            percentageAgihan, 
+            "Zakat Distributions Percentage"
+        );
+        createPercentageChart(
+            document.getElementById('asnafChart'),
+            asnafDataFiltered, 
+            percentageAsnaf, 
+            "Asnaf Distributions Percentage"
+        );
 
     </script>    
-    <script>
-        function generateReport() {
-            window.location.href = '../agihan/generateReport.php';
-        }
-    </script>
+    
 </body>
 </html>

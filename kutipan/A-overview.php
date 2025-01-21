@@ -394,7 +394,7 @@
     const percentageType = calculatePercentageIncrease(typeDataFiltered);
 
     // Render percentage charts
-    const createPercentageChart = (ctx, data, label) => {
+    const createPercentageChart = (ctx, data, percentageData, label) => {
         new Chart(ctx, {
             type: 'line',
             data: {
@@ -412,16 +412,26 @@
                     legend: { position: 'top' },
                     tooltip: {
                         callbacks: {
-                            label: (context) => `${context.raw}%`, // Show percentage sign
+                            label: (context) => {
+                                const yearIndex = context.dataIndex;
+                                const amount = context.raw;
+                                const percentage =
+                                    percentageData[context.dataset.label] &&
+                                    percentageData[context.dataset.label][yearIndex - 1];
+                                return percentage !== undefined
+                                    ? `${context.dataset.label}: RM${amount.toLocaleString()} (${percentage}%)`
+                                    : `${context.dataset.label}: RM${amount.toLocaleString()}`;
+                            },
                         },
                     },
                 },
                 scales: {
                     y: {
                         beginAtZero: true,
-                        ticks: {
-                            callback: (value) => `${value}%`, // Show percentage sign
-                        },
+                            title: {
+                                display: true,
+                                text: 'Amount (RM)',
+                            },
                     },
                 },
             },
@@ -429,9 +439,24 @@
     };
 
     // Render charts
-    createPercentageChart(document.getElementById('monthlyChart'), percentageMonthly, "Monthly Performance Percentage");
-    createPercentageChart(document.getElementById('sourceChart'), percentageSource, "Source Contributions Percentage");
-    createPercentageChart(document.getElementById('typeChart'), percentageType, "Type Contributions Percentage");
+    createPercentageChart(
+        document.getElementById('monthlyChart'),
+        monthlyDataFiltered, 
+        percentageMonthly, 
+        "Monthly Performance Percentage"
+    );
+    createPercentageChart(
+        document.getElementById('sourceChart'), 
+        sourceDataFiltered,
+        percentageSource, 
+        "Source Contributions Percentage"
+    );
+    createPercentageChart(
+        document.getElementById('typeChart'), 
+        typeDataFiltered,
+        percentageType, 
+        "Type Contributions Percentage"
+    );
 </script>
 
 </body>
